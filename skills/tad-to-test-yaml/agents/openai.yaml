@@ -1,0 +1,4 @@
+interface:
+  display_name: "TAD 转 YAML 用例"
+  short_description: "将TAD/TRD/STD分析转换为结构化YAML测试用例"
+  default_prompt: "使用 $tad-to-test-yaml 基于这份 TAD 分析生成可追溯的 YAML 测试用例。"
