@@ -1,0 +1,4 @@
+interface:
+  display_name: "ATC 执行反馈闭环"
+  short_description: "诊断ATC执行失败、最小修复、复跑并沉淀黄金脚本与上游反馈"
+  default_prompt: "使用 $close-atc-feedback-loop 分析这次 ATC 执行结果，完成根因分类、最小修复、单例复跑和黄金脚本沉淀。"
