@@ -1,0 +1,4 @@
+interface:
+  display_name: "需求转 TAD 分析"
+  short_description: "将原始需求提炼为可追溯的TAD/TRD/STD测试分析"
+  default_prompt: "使用 $requirement-to-tad 将这份原始需求整理为结构化 TAD/TRD/STD 测试分析，并列出待确认项。"
