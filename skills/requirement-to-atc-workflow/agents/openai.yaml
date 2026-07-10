@@ -1,0 +1,4 @@
+interface:
+  display_name: "需求到 ATC 全流程"
+  short_description: "串联需求分析、YAML用例与Web ATC生成的完整测试流程"
+  default_prompt: "使用 $requirement-to-atc-workflow 将这份需求依次转换为 TAD 分析、YAML 测试用例和 Web ATC 自动化用例。"
