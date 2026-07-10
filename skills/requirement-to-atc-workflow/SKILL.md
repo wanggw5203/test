@@ -1,16 +1,16 @@
 ---
 name: requirement-to-atc-workflow
-description: "编排从原始需求到 TAD/TRD/STD 分析、YAML 测试用例，再到 Web UI ATC 自动化用例的端到端测试生成流程，并在阶段之间保持规则、用例和自动化脚本的可追溯关系。用户要求完整执行需求转测试分析、AI 用例生成和 Web UI 自动化，或检查三阶段产物是否一致时使用。"
+description: "编排从原始需求到 TAD/TRD/STD 分析、YAML 测试用例、Web UI ATC 自动化，再到执行诊断、修复复跑、黄金脚本和上游反馈的端到端闭环，并保持规则、用例、脚本和执行结果可追溯。用户要求完整执行需求转测试分析、AI 用例生成、Web UI 自动化和运行反馈，或检查四阶段产物是否一致时使用。"
 ---
 
 # 需求到 ATC 全流程
 
-按顺序编排三个阶段，并在每个阶段通过质量门禁后再进入下一阶段。开始前必须阅读 [阶段交付契约](references/pipeline-contract.md)。
+按顺序编排四个阶段，并在每个阶段通过质量门禁后再进入下一阶段。开始前必须阅读 [阶段交付契约](references/pipeline-contract.md)。
 
 ## 选择执行范围
 
 - 用户只要求一个阶段时，调用对应 Skill，不扩展其他阶段。
-- 用户要求完整链路时，依次使用 `$requirement-to-tad`、`$tad-to-test-yaml`、`$test-yaml-to-web-atc`。
+- 用户要求完整链路时，依次使用 `$requirement-to-tad`、`$tad-to-test-yaml`、`$test-yaml-to-web-atc`、`$close-atc-feedback-loop`。
 - 某个子 Skill 不可用时，按本文件的阶段目标执行，并明确缺少的专用规则。
 
 ## 第一阶段：需求转 TAD
@@ -37,12 +37,21 @@ description: "编排从原始需求到 TAD/TRD/STD 分析、YAML 测试用例，
 
 门禁：ATC 结构和资源校验通过；环境允许时单条试跑；最终断言与用户确认范围一致。
 
+## 第四阶段：ATC 执行反馈闭环
+
+输入 ATC 校验和执行结果、日志、截图、视频或 Trace、真实页面证据、功能 YAML、TAD 以及执行器配置。
+
+输出根因分类、最小修复、单例复跑、黄金脚本记录和结构化反馈报告。ATC 交互问题回写 ATC；数据问题回写变量或造数规则；业务规则冲突必须确认后按 TAD -> YAML -> ATC 顺序传播；环境与产品缺陷不得改写成业务期望。
+
+门禁：根因有证据，结构校验和目标单例复跑通过，黄金脚本满足稳定性条件，所有上游反馈已更新或明确标记待确认与阻塞。
+
 ## 保持追溯关系
 
 始终维护以下链路：
 
 ```text
-需求章节 -> TAD/TRD/STD 规则编号 -> YAML thought/caseId -> ATC functionalCaseIds
+需求章节 -> TAD/TRD/STD 规则编号 -> YAML thought/caseId
+-> ATC functionalCaseIds -> 执行反馈 runId -> 黄金 ATC/上游反馈
 ```
 
 不得在后续阶段丢失、改写或默默合并上游约束。发现冲突时停止传播错误结论，记录冲突和受影响产物。
@@ -55,6 +64,7 @@ description: "编排从原始需求到 TAD/TRD/STD 分析、YAML 测试用例，
 src/main/.../功能.md
 src/test/.../功能.yaml
 src/test/.../功能.atc.yaml
+src/test/.../功能.atc.feedback.yaml
 ```
 
 不得静默覆盖已有文件。覆盖意图不明确时，创建新文件或向用户说明冲突。
@@ -67,3 +77,4 @@ src/test/.../功能.atc.yaml
 - 各阶段执行了哪些解析、结构或运行校验。
 - 哪些页面操作仍需真实环境校准。
 - 哪些待确认项会影响用例覆盖或自动化稳定性。
+- 哪些脚本已升级为黄金基线，以及哪些结论已回写 TAD、YAML、数据规则或执行器。
