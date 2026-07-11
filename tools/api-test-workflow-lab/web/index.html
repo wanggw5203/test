@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>接口自动化实践台</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-mark"><i data-lucide="workflow"></i></div>
+      <div>
+        <h1>接口自动化实践台</h1>
+        <span id="connectionStatus" class="connection"><b></b> 本地服务</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <span id="sessionBadge" class="session-badge">未创建会话</span>
+      <button class="icon-button" id="resetButton" title="重置页面" aria-label="重置页面">
+        <i data-lucide="rotate-ccw"></i>
+      </button>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <nav class="stage-nav" aria-label="流程阶段">
+      <button class="stage active" data-stage="inspect">
+        <span class="stage-index">1</span><span>框架取证</span><i data-lucide="chevron-right"></i>
+      </button>
+      <button class="stage" data-stage="spec">
+        <span class="stage-index">2</span><span>生成规格</span><i data-lucide="chevron-right"></i>
+      </button>
+      <button class="stage" data-stage="generate">
+        <span class="stage-index">3</span><span>生成校验</span><i data-lucide="chevron-right"></i>
+      </button>
+      <button class="stage" data-stage="data">
+        <span class="stage-index">4</span><span>数据加工</span><i data-lucide="chevron-right"></i>
+      </button>
+      <button class="stage" data-stage="compile">
+        <span class="stage-index">5</span><span>编译运行</span><i data-lucide="chevron-right"></i>
+      </button>
+      <button class="stage" data-stage="feedback">
+        <span class="stage-index">6</span><span>反馈闭环</span><i data-lucide="chevron-right"></i>
+      </button>
+    </nav>
+
+    <main class="workspace">
+      <section class="toolbar-band">
+        <label class="path-field">
+          <span>Put 项目目录</span>
+          <input id="projectPath" value="/Users/wangguangwen/IdeaProjects/Put/dhr-third-employment-http-test" spellcheck="false">
+        </label>
+        <label class="mode-control">
+          <input type="checkbox" id="safeCopy" checked>
+          <span class="toggle"></span>
+          <span>临时副本</span>
+        </label>
+        <button id="inspectButton" class="button secondary"><i data-lucide="scan-search"></i>检查</button>
+        <button id="sessionButton" class="button primary"><i data-lucide="play"></i>开始实践</button>
+      </section>
+
+      <div class="work-grid">
+        <section class="editor-pane">
+          <div class="pane-header">
+            <div>
+              <span class="eyebrow">GENERATION SPEC</span>
+              <h2>接口脚手架规格</h2>
+            </div>
+            <div class="segmented" role="group" aria-label="编辑器视图">
+              <button class="selected" data-view="spec">YAML</button>
+              <button data-view="plan">加工计划</button>
+            </div>
+          </div>
+          <textarea id="specEditor" aria-label="生成规格 YAML" spellcheck="false"></textarea>
+          <pre id="planViewer" class="plan-viewer hidden"></pre>
+          <div class="action-bar">
+            <button id="exampleButton" class="button ghost"><i data-lucide="file-input"></i>载入样例</button>
+            <div class="action-spacer"></div>
+            <button id="generateButton" class="button primary" disabled><i data-lucide="package-plus"></i>生成脚手架</button>
+            <button id="validateButton" class="button secondary" disabled><i data-lucide="shield-check"></i>严格校验</button>
+          </div>
+        </section>
+
+        <aside class="evidence-pane">
+          <div class="pane-header compact">
+            <div>
+              <span class="eyebrow">EVIDENCE</span>
+              <h2>框架证据</h2>
+            </div>
+            <span id="evidenceStatus" class="status neutral">待检查</span>
+          </div>
+          <div id="metrics" class="metrics">
+            <div><span>测试类</span><strong>--</strong></div>
+            <div><span>Suite YAML</span><strong>--</strong></div>
+            <div><span>JSON5</span><strong>--</strong></div>
+            <div><span>数据准备器</span><strong>--</strong></div>
+          </div>
+
+          <div class="section-label">阶段门禁</div>
+          <div id="gates" class="gate-list">
+            <div data-gate="inspect"><i data-lucide="circle"></i><span>框架证据</span><b>等待</b></div>
+            <div data-gate="generate"><i data-lucide="circle"></i><span>脚手架生成</span><b>等待</b></div>
+            <div data-gate="validate"><i data-lucide="circle"></i><span>Manifest 校验</span><b>等待</b></div>
+            <div data-gate="compile"><i data-lucide="circle"></i><span>测试编译</span><b>等待</b></div>
+            <div data-gate="run"><i data-lucide="circle"></i><span>目标单例</span><b>未运行</b></div>
+          </div>
+
+          <div class="section-label">生成产物 <span id="artifactCount">0</span></div>
+          <div id="artifactList" class="artifact-list">
+            <div class="empty-state"><i data-lucide="folder-open"></i><span>暂无产物</span></div>
+          </div>
+
+          <div class="run-panel">
+            <label>
+              <span>测试类名</span>
+              <input id="testClass" value="SupplierEntryProcessAuditSubmitGeneratedTests" spellcheck="false">
+            </label>
+            <div class="run-actions">
+              <button id="compileButton" class="button secondary" disabled><i data-lucide="hammer"></i>测试编译</button>
+              <button id="runButton" class="button danger" disabled><i data-lucide="flask-conical"></i>运行单例</button>
+            </div>
+            <label class="confirm-run">
+              <input id="confirmRun" type="checkbox">
+              <span>允许创建测试数据并调用真实接口</span>
+            </label>
+          </div>
+        </aside>
+      </div>
+
+      <section class="console-pane">
+        <div class="console-header">
+          <span><i data-lucide="terminal-square"></i>执行日志</span>
+          <button id="clearLog" class="icon-button small" title="清空日志" aria-label="清空日志"><i data-lucide="trash-2"></i></button>
+        </div>
+        <pre id="consoleOutput"><span class="muted">等待操作...</span></pre>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script src="/app.js"></script>
+</body>
+</html>

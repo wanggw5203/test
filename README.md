@@ -14,7 +14,8 @@ skills/
 └── requirement-to-atc-workflow/ # UI/接口双通道端到端编排
 
 tools/
-└── api-test-scaffold-generator/ # 脚手架生成器 Maven 源码
+├── api-test-scaffold-generator/ # 脚手架生成器 Maven 源码
+└── api-test-workflow-lab/       # 页面化接口自动化实践台
 
 dist/
 └── api-test-scaffold-generator.jar # 可独立执行的 fat JAR
@@ -66,6 +67,16 @@ cp -R skills/requirement-to-atc-workflow ~/.codex/skills/
 java -jar dist/api-test-scaffold-generator.jar example
 java -jar dist/api-test-scaffold-generator.jar generate --spec generation-spec.yaml --project /path/to/project
 ```
+
+## 页面化实践
+
+启动本地实践台：
+
+```bash
+python3 tools/api-test-workflow-lab/server.py
+```
+
+打开 `http://127.0.0.1:8765`，可以在页面完成框架取证、生成规格编辑、脚手架生成、Manifest 校验、加工计划查看、测试编译和目标单例运行。默认通过临时 Git 副本隔离业务项目；运行真实单例前必须显式确认。
 
 ## 完整链路实践
 
