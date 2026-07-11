@@ -1,0 +1,87 @@
+schemaVersion: 1
+apiCode: apicode_41032_5201_generated
+description: 合作用工-提交审核生成样例
+packageName: com.pupu.third.employment.apicode_41032_5201_generated
+resourcePackage: com.pupu.third.employment.apicode_41032_5201_generated
+className: SupplierEntryProcessAuditSubmitGeneratedTests
+author: wanggw5203
+tester: "1000000"
+dataKey: 合作用工-提交审核生成样例
+template: data-preparation
+environments:
+  - pre
+  - test
+java:
+  baseClass: BaseTest
+  imports:
+    - com.pupu.databuilder.third.employment.supplier_entry.supplier_entry_added_pending_submission_person.SupplierEntryAuditSubmitDataPreparer
+    - com.pupu.put.common.BaseTest
+    - com.pupu.put.common.PuTester
+    - com.pupu.put.configuration.dataprovider.DataDriveUtil
+    - com.pupu.put.configuration.dto.FrameConfigInfo
+    - com.pupu.third.employment.api.ThirdEmploymentApi
+    - com.pupu.third.employment.dto.JsonResponse
+    - com.pupu.third.employment.ro.SupplierAuditSubmitRO
+    - java.lang.reflect.Method
+    - java.util.List
+    - org.apache.commons.collections4.CollectionUtils
+    - org.springframework.beans.factory.annotation.Autowired
+    - org.testng.Assert
+    - org.testng.annotations.DataProvider
+    - org.testng.annotations.Test
+  classAnnotations:
+    - '@PuTester("${tester}")'
+  classMembers:
+    - '@Autowired'
+    - 'private ThirdEmploymentApi thirdEmploymentApi;'
+  dataProviderName: auditSubmitDataProvider
+  dataProviderMethod: prepareTestData
+  dataLoaderExpression: 'DataDriveUtil.loadTestData(method, "${dataKey}", true)'
+  testMethodName: auditSubmitTests
+  testParameters:
+    - FrameConfigInfo config
+    - SupplierAuditSubmitRO request
+    - JsonResponse<Boolean> expect
+  preparationLines:
+    - 'new SupplierEntryAuditSubmitDataPreparer(thirdEmploymentApi).prepare(request);'
+  actualType: JsonResponse<Boolean>
+  actualExpression: thirdEmploymentApi.auditSubmit(request)
+  diffExpression: DataDriveUtil.diffFieldValue(expect, actual)
+cases:
+  - name: 01_全职商家人资待提交人员提交审核成功
+    thought: 使用运行时创建的待提交人员ID，验证全职商家人资提交审核成功并返回data=true。
+    mockId: null
+    users:
+      - "1000000"
+    requestRef: 01_全职商家人资待提交人员提交审核成功.json
+    expectRef: 01_全职商家人资待提交人员提交审核成功.json
+    request:
+      base:
+        ids:
+          - __DATA_REF:pending_entry.entry_id__
+        position_id: 1000001
+        employment_state: "1"
+        _enum:
+          employment_state:
+            全职: "1"
+            兼职: "2"
+          position_id:
+            示例角色A: 1000001
+            示例角色B: 1000002
+      overrides: {}
+    expect:
+      base:
+        data: true
+      overrides: {}
+    fieldHints:
+      - field: ids
+        kind: runtime-business-data
+        semantic: 本次运行创建的待提交人员
+        valueSource: supplier_entry.create_pending_person
+        placeholder: __DATA_REF:pending_entry.entry_id__
+        required: true
+      - field: employment_state
+        kind: business-enum
+        semantic: 全职
+        valueSource: request._enum.employment_state
+        required: true

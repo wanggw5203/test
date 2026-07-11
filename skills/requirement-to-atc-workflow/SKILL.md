@@ -1,16 +1,19 @@
 ---
 name: requirement-to-atc-workflow
-description: "编排从原始需求到 TAD/TRD/STD 分析、YAML 测试用例、Web UI ATC 自动化，再到执行诊断、修复复跑、黄金脚本和上游反馈的端到端闭环，并保持规则、用例、脚本和执行结果可追溯。用户要求完整执行需求转测试分析、AI 用例生成、Web UI 自动化和运行反馈，或检查四阶段产物是否一致时使用。"
+description: "编排从原始需求到 TAD/TRD/STD 分析和 YAML 测试用例，再按标签进入 Web UI ATC 或接口自动化脚手架，完成可执行化、运行诊断、修复复跑、黄金样例和上游反馈的端到端闭环。用户要求完整执行需求转测试分析、AI 用例生成、UI/接口自动化与反馈，或检查跨阶段产物是否一致时使用。"
 ---
 
-# 需求到 ATC 全流程
+# 需求到自动化全流程
 
-按顺序编排四个阶段，并在每个阶段通过质量门禁后再进入下一阶段。开始前必须阅读 [阶段交付契约](references/pipeline-contract.md)。
+按顺序编排公共阶段，并在 YAML 之后选择 Web UI 或接口自动化通道。每个阶段通过质量门禁后再进入下一阶段。开始前必须阅读 [阶段交付契约](references/pipeline-contract.md)。
 
 ## 选择执行范围
 
 - 用户只要求一个阶段时，调用对应 Skill，不扩展其他阶段。
-- 用户要求完整链路时，依次使用 `$requirement-to-tad`、`$tad-to-test-yaml`、`$test-yaml-to-web-atc`、`$close-atc-feedback-loop`。
+- 用户要求完整链路时，先使用 `$requirement-to-tad` 和 `$tad-to-test-yaml`，再按用例标签分流。
+- `前端` 用例使用 `$test-yaml-to-web-atc` 和 `$close-atc-feedback-loop`。
+- `接口` 或 `服务端` 用例使用 `$api-test-automation-workflow`，由其完成脚手架、二次加工、诊断和反馈。
+- 同一需求同时包含两类用例时允许双通道并行，但两边必须引用相同 TAD/STD 规则与稳定 `caseId`。
 - 某个子 Skill 不可用时，按本文件的阶段目标执行，并明确缺少的专用规则。
 
 ## 第一阶段：需求转 TAD
@@ -29,7 +32,11 @@ description: "编排从原始需求到 TAD/TRD/STD 分析、YAML 测试用例、
 
 门禁：YAML 可解析，字段完整，名称和 ID 唯一，P0 覆盖完整，每条用例可以追溯到分析规则。
 
-## 第三阶段：YAML 转 Web ATC
+## 第三阶段：按标签分流
+
+解析每条用例的 `tags`，不把接口断言强行转换成页面操作，也不把页面行为降级为单接口调用。
+
+### Web UI 通道
 
 输入功能 YAML、需求规则、用户确认的自动化范围、已跑通的黄金 ATC、真实页面证据、上传资源和执行器配置。
 
@@ -37,7 +44,17 @@ description: "编排从原始需求到 TAD/TRD/STD 分析、YAML 测试用例、
 
 门禁：ATC 结构和资源校验通过；环境允许时单条试跑；最终断言与用户确认范围一致。
 
-## 第四阶段：ATC 执行反馈闭环
+### 接口自动化通道
+
+输入接口/服务端 YAML、TAD/STD 接口规则、目标仓库中的 Put 黄金测试、API 封装、RO/DTO 和数据准备证据。
+
+先形成 `generation-spec.yaml`，使用 Skill 自带 JAR 生成 Java TestNG、数据驱动 YAML、请求/期望 JSON5、清单和可执行化计划；再用 `$make-api-tests-executable` 对运行时业务数据、环境基础数据、枚举和唯一字段做二次加工。最后测试编译并运行最小目标单例。
+
+门禁：初始严格清单校验通过；二次加工后无缺失或畸形文件；反向场景和断言未被削弱；测试编译通过，有真实环境时目标单例有明确运行结果。
+
+## 第四阶段：执行反馈闭环
+
+### Web UI 反馈
 
 输入 ATC 校验和执行结果、日志、截图、视频或 Trace、真实页面证据、功能 YAML、TAD 以及执行器配置。
 
@@ -45,13 +62,20 @@ description: "编排从原始需求到 TAD/TRD/STD 分析、YAML 测试用例、
 
 门禁：根因有证据，结构校验和目标单例复跑通过，黄金脚本满足稳定性条件，所有上游反馈已更新或明确标记待确认与阻塞。
 
+### 接口反馈
+
+输入编译输出、Surefire/TestNG 报告、HTTP 调用链、数据准备日志、接口响应、生成清单、接口 YAML 和 TAD/STD。
+
+由 `$api-test-automation-workflow` 使用 `$diagnose-and-repair-tests` 定位生成、编译、鉴权、网络、数据准备、业务响应或字段断言问题，做最小修复并复跑同一单例。稳定通过的脚本登记为接口黄金样例；环境、权限和产品缺陷保留证据，不修改正确期望。
+
 ## 保持追溯关系
 
 始终维护以下链路：
 
 ```text
 需求章节 -> TAD/TRD/STD 规则编号 -> YAML thought/caseId
--> ATC functionalCaseIds -> 执行反馈 runId -> 黄金 ATC/上游反馈
+-> Web: ATC functionalCaseIds -> UI runId -> 黄金 ATC/上游反馈
+-> API: generation-spec -> scaffold-manifest -> API runId -> 黄金接口样例/上游反馈
 ```
 
 不得在后续阶段丢失、改写或默默合并上游约束。发现冲突时停止传播错误结论，记录冲突和受影响产物。
@@ -63,8 +87,11 @@ description: "编排从原始需求到 TAD/TRD/STD 分析、YAML 测试用例、
 ```text
 src/main/.../功能.md
 src/test/.../功能.yaml
-src/test/.../功能.atc.yaml
-src/test/.../功能.atc.feedback.yaml
+src/test/.../功能.atc.yaml                      # Web UI 通道
+src/test/.../功能.atc.feedback.yaml             # Web UI 通道
+generation-spec.yaml                            # 接口通道
+.api-test-generator/<apiCode>/scaffold-manifest.yaml
+.api-test-generator/<apiCode>/<apiCode>.api.feedback.yaml
 ```
 
 不得静默覆盖已有文件。覆盖意图不明确时，创建新文件或向用户说明冲突。
@@ -76,5 +103,6 @@ src/test/.../功能.atc.feedback.yaml
 - 每个阶段生成或更新了哪些文件。
 - 各阶段执行了哪些解析、结构或运行校验。
 - 哪些页面操作仍需真实环境校准。
+- 哪些接口数据已完成运行时造数、枚举转换或环境查询。
 - 哪些待确认项会影响用例覆盖或自动化稳定性。
-- 哪些脚本已升级为黄金基线，以及哪些结论已回写 TAD、YAML、数据规则或执行器。
+- 哪些 UI 或接口脚本已升级为黄金基线，以及哪些结论已回写 TAD、YAML、数据规则、生成规格或执行器。

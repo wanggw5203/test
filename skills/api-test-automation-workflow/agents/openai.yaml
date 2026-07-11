@@ -1,0 +1,4 @@
+interface:
+  display_name: "接口自动化生成闭环"
+  short_description: "从接口用例生成Put脚手架并二次加工为可执行测试，完成诊断与反馈闭环"
+  default_prompt: "使用 $api-test-automation-workflow 将接口测试用例生成脚手架，完成数据可执行化、运行诊断和结果回写。"
