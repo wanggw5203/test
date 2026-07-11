@@ -25,7 +25,7 @@ suite:
 TestCases:
   - name: 添加待入职人员-完整信息并保存
     description: 填写核心信息、上传附件并保存成功
-    path: /third-employment/food-manage/onboarding/add-staff
+    path: /records/new
     functionalCaseIds:
       - functional-case-id
     relationPages:

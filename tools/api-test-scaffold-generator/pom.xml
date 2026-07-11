@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.wanggw.testing</groupId>
+    <groupId>io.github.apitestkit</groupId>
     <artifactId>api-test-scaffold-generator</artifactId>
     <version>1.0.0</version>
     <name>API Test Scaffold Generator</name>
-    <description>Generate Put-style Java, YAML, JSON5 API test scaffolds and executableization plans.</description>
+    <description>Generate framework-neutral Java, YAML, JSON5 API test scaffolds and executableization plans.</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -58,7 +58,7 @@
                             <shadedArtifactAttached>false</shadedArtifactAttached>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.wanggw.api.scaffold.ScaffoldGeneratorCli</mainClass>
+                                    <mainClass>io.github.apitestkit.scaffold.ScaffoldGeneratorCli</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

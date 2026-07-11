@@ -16,6 +16,24 @@ python3 tools/api-test-workflow-lab/server.py
 python3 tools/api-test-workflow-lab/server.py --no-open
 ```
 
+本地模式连接真实生成器、项目文件和 Maven。若 `8765` 已被占用：
+
+```bash
+python3 tools/api-test-workflow-lab/server.py --port 8766
+```
+
+## GitHub Pages
+
+仓库包含 `.github/workflows/pages.yml`。推送到 `main` 后，GitHub Actions 会发布：
+
+```text
+https://<github-user>.github.io/<repository>/
+```
+
+仓库首次启用时，在 GitHub 的 `Settings -> Pages -> Build and deployment -> Source` 选择 `GitHub Actions`，再手动运行 `Deploy workflow lab to GitHub Pages` 或推送一次页面文件。
+
+Pages 版运行在浏览器演练模式，可完整操作取证、生成、校验和编译门禁，但不会读取访问者电脑上的项目，也不会执行 Java、Maven 或真实接口。需要真实执行时启动本地服务。
+
 ## 操作边界
 
 - 默认勾选“临时副本”，服务通过本地 Git 克隆创建隔离工作目录。

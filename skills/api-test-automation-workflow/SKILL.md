@@ -1,6 +1,6 @@
 ---
 name: api-test-automation-workflow
-description: "把 TAD/TRD/STD 生成的接口或服务端 YAML 用例转换为 Put 风格接口自动化脚手架，再对假 ID、枚举、环境基础数据、运行时业务数据和前置状态做二次可执行化加工，完成编译、单例运行、失败诊断、最小修复和上游反馈。用户要求生成接口自动化框架代码、把接口 YAML 转成 Java/TestNG/YAML/JSON5 脚手架、使用 api-test-scaffold-generator.jar、加工 apicode_xxx 用例，或建立接口自动化闭环时使用。"
+description: "把 TAD/TRD/STD 生成的接口或服务端 YAML 用例转换为 Java/TestNG 风格接口自动化脚手架，再对假 ID、枚举、环境基础数据、运行时业务数据和前置状态做二次可执行化加工，完成编译、单例运行、失败诊断、最小修复和上游反馈。用户要求生成接口自动化框架代码、把接口 YAML 转成 Java/TestNG/YAML/JSON5 脚手架、使用 api-test-scaffold-generator.jar、加工接口测试用例，或建立接口自动化闭环时使用。"
 ---
 
 # 接口自动化生成闭环

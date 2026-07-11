@@ -1,6 +1,6 @@
 # 需求到 UI/接口自动化中文 Skills
 
-这是一组从知识库和现有 Put 自动化框架中提炼的通用测试 Skills，覆盖“需求结构化分析 -> YAML 测试用例 -> Web UI ATC 或接口自动化 -> 执行诊断与反馈沉淀”完整闭环。Skill 的机器标识使用英文小写和连字符，面向使用者的说明、规则和默认提示词均已中文化。
+这是一组从知识库和接口自动化实践中提炼的通用测试 Skills，覆盖“需求结构化分析 -> YAML 测试用例 -> Web UI ATC 或接口自动化 -> 执行诊断与反馈沉淀”完整闭环。Skill 的机器标识使用英文小写和连字符，面向使用者的说明、规则和默认提示词均已中文化。
 
 ## 目录
 
@@ -10,7 +10,7 @@ skills/
 ├── tad-to-test-yaml/            # TAD/TRD/STD -> YAML 测试用例
 ├── test-yaml-to-web-atc/        # 功能 YAML -> Web ATC
 ├── close-atc-feedback-loop/      # ATC 执行 -> 诊断、修复、复跑与反馈
-├── api-test-automation-workflow/ # 接口 YAML -> Put 脚手架 -> 可执行化与反馈
+├── api-test-automation-workflow/ # 接口 YAML -> 框架脚手架 -> 可执行化与反馈
 └── requirement-to-atc-workflow/ # UI/接口双通道端到端编排
 
 tools/
@@ -58,7 +58,7 @@ cp -R skills/requirement-to-atc-workflow ~/.codex/skills/
 ```
 
 ```text
-使用 $api-test-automation-workflow，读取目标 Put 项目和接口 YAML，生成接口自动化脚手架，完成运行时数据二次加工、测试编译、单例执行和反馈回写。
+使用 $api-test-automation-workflow，读取目标测试项目和接口 YAML，生成接口自动化脚手架，完成运行时数据二次加工、测试编译、单例执行和反馈回写。
 ```
 
 生成器也可独立使用：
@@ -78,10 +78,12 @@ python3 tools/api-test-workflow-lab/server.py
 
 打开 `http://127.0.0.1:8765`，可以在页面完成框架取证、生成规格编辑、脚手架生成、Manifest 校验、加工计划查看、测试编译和目标单例运行。默认通过临时 Git 副本隔离业务项目；运行真实单例前必须显式确认。
 
+推送到 GitHub 后，Pages 工作流会发布在线演练版。在线版可直接完成页面流程练习，但受浏览器安全边界限制，不读取本机项目、不执行 JAR/Maven、不调用真实接口；真实执行仍使用本地地址。
+
 ## 完整链路实践
 
 ```text
-使用 $requirement-to-atc-workflow，将这份需求依次生成 TAD 和 YAML；前端用例生成 Web ATC，接口/服务端用例生成 Put 接口自动化脚手架；执行目标单例并完成诊断、修复、复跑和反馈沉淀。
+使用 $requirement-to-atc-workflow，将这份需求依次生成 TAD 和 YAML；前端用例生成 Web ATC，接口/服务端用例生成接口自动化脚手架；执行目标单例并完成诊断、修复、复跑和反馈沉淀。
 ```
 
 Web ATC 依赖真实页面或已跑通黄金脚本。接口自动化依赖目标仓库中的黄金测试、API 封装和 RO/DTO 证据。缺少证据时 Skill 会标记待确认，不猜测页面路径、Java 类型、接口方法或业务枚举。执行闭环只有在根因有证据、目标单例复跑通过、反馈已回写或明确阻塞时才算完成。

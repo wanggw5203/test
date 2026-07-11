@@ -1,4 +1,4 @@
-package com.wanggw.api.scaffold;
+package io.github.apitestkit.scaffold;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ class ScaffoldGeneratorCliTest {
 
         assertEquals(0, exitCode);
         String output = buffer.toString(StandardCharsets.UTF_8);
-        assertTrue(output.contains("apiCode: apicode_41032_5201_generated"));
+        assertTrue(output.contains("apiCode: api_record_create"));
         assertTrue(output.contains("fieldHints:"));
     }
 }

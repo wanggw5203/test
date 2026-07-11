@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>接口自动化实践台</title>
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="./styles.css">
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
 </head>
 <body>
@@ -49,8 +49,8 @@
     <main class="workspace">
       <section class="toolbar-band">
         <label class="path-field">
-          <span>Put 项目目录</span>
-          <input id="projectPath" value="/Users/wangguangwen/IdeaProjects/Put/dhr-third-employment-http-test" spellcheck="false">
+          <span>测试项目目录</span>
+          <input id="projectPath" placeholder="/path/to/api-test-project" spellcheck="false">
         </label>
         <label class="mode-control">
           <input type="checkbox" id="safeCopy" checked>
@@ -115,7 +115,7 @@
           <div class="run-panel">
             <label>
               <span>测试类名</span>
-              <input id="testClass" value="SupplierEntryProcessAuditSubmitGeneratedTests" spellcheck="false">
+              <input id="testClass" value="RecordCreateGeneratedTests" spellcheck="false">
             </label>
             <div class="run-actions">
               <button id="compileButton" class="button secondary" disabled><i data-lucide="hammer"></i>测试编译</button>
@@ -140,6 +140,6 @@
   </div>
 
   <div id="toast" class="toast" role="status"></div>
-  <script src="/app.js"></script>
+  <script src="./app.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.wanggw.api.scaffold;
+package io.github.apitestkit.scaffold;
 
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
@@ -202,11 +202,7 @@ public class ApiTestScaffoldGenerator {
                 .append(" * @create ").append(LocalDate.now()).append('\n')
                 .append(" * @desc ").append(spec.getDescription()).append('\n')
                 .append(" */\n");
-        if (java.getClassAnnotations() == null || java.getClassAnnotations().isEmpty()) {
-            if (spec.getTester() != null && !spec.getTester().isBlank()) {
-                out.append("@PuTester(\"").append(escapeJava(spec.getTester())).append("\")\n");
-            }
-        } else {
+        if (java.getClassAnnotations() != null) {
             for (String annotation : java.getClassAnnotations()) {
                 out.append(annotation.replace("${tester}", spec.getTester() == null ? "" : spec.getTester()))
                         .append('\n');

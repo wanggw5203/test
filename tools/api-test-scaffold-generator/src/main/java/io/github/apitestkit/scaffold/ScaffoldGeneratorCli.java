@@ -1,4 +1,4 @@
-package com.wanggw.api.scaffold;
+package io.github.apitestkit.scaffold;
 
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;

@@ -1,5 +1,8 @@
 const state = {
   session: null,
+  mode: new URLSearchParams(window.location.search).get("demo") === "1"
+    ? "demo"
+    : ["127.0.0.1", "localhost", "::1"].includes(window.location.hostname) ? "local" : "demo",
   gates: { inspect: null, generate: null, validate: null, compile: null, run: null },
 };
 
@@ -7,6 +10,7 @@ const $ = (id) => document.getElementById(id);
 const consoleOutput = $("consoleOutput");
 
 async function api(path, options = {}) {
+  if (state.mode === "demo") return demoApi(path, options);
   const response = await fetch(path, {
     headers: { "Content-Type": "application/json", ...(options.headers || {}) },
     ...options,
@@ -14,6 +18,50 @@ async function api(path, options = {}) {
   const data = await response.json();
   if (!response.ok || data.error) throw new Error(data.error || `HTTP ${response.status}`);
   return data;
+}
+
+async function demoApi(path, options = {}) {
+  const body = options.body ? JSON.parse(options.body) : {};
+  const evidence = {
+    path: "browser-demo/api-test-project", exists: true, pom: true, git: true,
+    testClasses: 12, suiteFiles: 9, json5Files: 36, apiClasses: 5, dataPreparers: 4,
+    samples: ["src/test/java/example/RecordQueryTests.java", "src/test/java/example/RecordCreateTests.java"],
+  };
+  if (path === "/api/health") return { status: "ok", jar: false, demo: true, version: "1.0.0" };
+  if (path === "/api/example-spec") {
+    const response = await fetch("./sample-spec.yaml");
+    return { spec: await response.text() };
+  }
+  if (path.startsWith("/api/inspect")) return evidence;
+  if (path === "/api/session") {
+    return {
+      id: "demo-session", sourceProject: body.project || "browser-demo/api-test-project",
+      workspace: "browser-demo/workspace", mode: "copy", evidence,
+      manifest: null, plan: null, planText: "", generatedFiles: [],
+    };
+  }
+  if (path === "/api/generate") {
+    const generatedFiles = [
+      ".api-test-generator/api_record_create/executableization-plan.yaml",
+      ".api-test-generator/api_record_create/scaffold-manifest.yaml",
+      "src/test/java/com/example/automation/api_record_create/RecordCreateGeneratedTests.java",
+      "src/test/resources/com/example/automation/api_record_create/01_有效管理员创建记录成功_req_staging.json5",
+      "src/test/resources/com/example/automation/api_record_create/01_有效管理员创建记录成功_exp_staging.json5",
+      "src/test/resources/com/example/automation/api_record_create/01_有效管理员创建记录成功_req_test.json5",
+      "src/test/resources/com/example/automation/api_record_create/01_有效管理员创建记录成功_exp_test.json5",
+      "src/test/resources/com/example/automation/api_record_create/记录管理-创建记录生成样例.yaml",
+    ];
+    const planText = "schemaVersion: 1\napiCode: api_record_create\nstatus: pending\nnextSkill: make-api-tests-executable\nfields:\n  - field: parent_id\n    kind: runtime-business-data\n    decision: pending\n  - field: role_code\n    kind: business-enum\n    decision: pending\n";
+    return {
+      command: "java -jar api-test-scaffold-generator.jar generate --spec generation-spec.yaml --project workspace",
+      exitCode: 0, success: true, output: "演练生成完成\nFiles: 8",
+      session: { id: "demo-session", sourceProject: "browser-demo/api-test-project", workspace: "browser-demo/workspace", mode: "copy", evidence: {...evidence, testClasses: 13, suiteFiles: 10, json5Files: 40}, manifest: "browser-demo/workspace/.api-test-generator/api_record_create/scaffold-manifest.yaml", plan: "browser-demo/workspace/.api-test-generator/api_record_create/executableization-plan.yaml", planText, generatedFiles },
+    };
+  }
+  if (path === "/api/validate") return { command: "validate --strict-checksums", exitCode: 0, success: true, output: "Validation: PASS\nMissing: 0\nModified: 0\nMalformed: 0" };
+  if (path === "/api/compile") return { command: "mvn -DskipTests test-compile", exitCode: 0, success: true, output: "[INFO] BUILD SUCCESS\n[INFO] GitHub Pages 演练模式未执行本机 Maven" };
+  if (path === "/api/run") throw new Error("在线演练模式不调用真实接口，请在本地模式运行单例");
+  throw new Error("演练接口不存在");
 }
 
 function toast(message, error = false) {
@@ -97,7 +145,7 @@ function renderSession(session) {
   $("generateButton").disabled = false;
   $("validateButton").disabled = !session.manifest;
   $("compileButton").disabled = !session.manifest;
-  $("runButton").disabled = !session.manifest;
+  $("runButton").disabled = !session.manifest || state.mode === "demo";
   if (window.lucide) lucide.createIcons();
 }
 
@@ -113,6 +161,7 @@ async function inspect() {
   const button = $("inspectButton");
   setBusy(button, true, "检查中");
   try {
+    if (state.mode === "local" && !$("projectPath").value.trim()) throw new Error("请输入本地测试项目目录");
     const evidence = await api(`/api/inspect?project=${encodeURIComponent($("projectPath").value)}`);
     renderEvidence(evidence);
     appendLog("框架取证完成", { success: evidence.exists && evidence.pom, output: JSON.stringify(evidence, null, 2) });
@@ -125,6 +174,7 @@ async function createSession() {
   const button = $("sessionButton");
   setBusy(button, true, "准备中");
   try {
+    if (state.mode === "local" && !$("projectPath").value.trim()) throw new Error("请输入本地测试项目目录");
     const session = await api("/api/session", {
       method: "POST",
       body: JSON.stringify({ project: $("projectPath").value, mode: $("safeCopy").checked ? "copy" : "in-place" }),
@@ -218,7 +268,16 @@ async function bootstrap() {
   try {
     const health = await api("/api/health");
     $("connectionStatus").classList.add("online");
-    $("connectionStatus").lastChild.textContent = health.jar ? " 本地服务 · JAR 就绪" : " 本地服务 · JAR 缺失";
+    $("connectionStatus").lastChild.textContent = state.mode === "demo"
+      ? " GitHub Pages · 演练模式"
+      : health.jar ? " 本地服务 · JAR 就绪" : " 本地服务 · JAR 缺失";
+    if (state.mode === "demo") {
+      $("projectPath").value = "browser-demo/api-test-project";
+      $("projectPath").disabled = true;
+      $("safeCopy").disabled = true;
+      $("confirmRun").disabled = true;
+      $("runButton").title = "在线演练模式不调用真实接口";
+    }
   } catch (error) { appendError("服务连接失败", error); }
   await loadExample();
 }

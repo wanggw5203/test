@@ -1,6 +1,6 @@
 # API Test Scaffold Generator
 
-从 Put 接口测试项目的生成约定中抽取的独立 CLI/Library。它生成 Java 测试类、`testDataSuite` YAML、pre/test 双套 JSON5、脚手架清单和二次加工计划，但不依赖 Put 私有 JAR 编译自身。
+面向 Java/TestNG 数据驱动接口测试项目的独立 CLI/Library。它生成 Java 测试类、`testDataSuite` YAML、多环境 JSON5、脚手架清单和二次加工计划，自身不依赖任何业务测试框架。
 
 ## 构建
 

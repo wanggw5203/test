@@ -48,7 +48,7 @@ java:
   baseClass: BaseTest
   imports: []
   classAnnotations:
-    - '@PuTester("${tester}")'
+    - '@TestOwner("automation")'
   classMembers: []
   dataProviderName: TestCase
   dataProviderMethod: prepareTestData
