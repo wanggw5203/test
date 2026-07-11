@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import mimetypes
+import os
 import re
 import shutil
 import subprocess
@@ -19,6 +20,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, urlparse
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
 
 APP_DIR = Path(__file__).resolve().parent
@@ -27,6 +30,12 @@ WEB_DIR = APP_DIR / "web"
 JAR_PATH = REPO_ROOT / "dist" / "api-test-scaffold-generator.jar"
 EXAMPLE_SPEC = REPO_ROOT / "tools" / "api-test-scaffold-generator" / "src" / "main" / "resources" / "example-spec.yaml"
 CLASS_NAME = re.compile(r"^[A-Za-z_$][A-Za-z0-9_.$]*$")
+LLM_STAGES = {
+    "requirement-to-tad": REPO_ROOT / "skills" / "requirement-to-tad" / "SKILL.md",
+    "tad-to-test-yaml": REPO_ROOT / "skills" / "tad-to-test-yaml" / "SKILL.md",
+    "test-yaml-to-api-spec": REPO_ROOT / "skills" / "api-test-automation-workflow" / "SKILL.md",
+    "api-feedback": REPO_ROOT / "skills" / "api-test-automation-workflow" / "references" / "api-feedback-contract.md",
+}
 
 
 @dataclass
@@ -61,6 +70,79 @@ def run_command(args: list[str], cwd: Path, timeout: int = 240) -> dict[str, Any
         "output": process.stdout,
         "success": process.returncode == 0,
     }
+
+
+def llm_status() -> dict[str, Any]:
+    return {
+        "configured": bool(os.environ.get("LLM_API_KEY")),
+        "baseUrl": os.environ.get("LLM_BASE_URL", "https://api.openai.com/v1"),
+        "model": os.environ.get("LLM_MODEL", "gpt-5-mini"),
+        "protocol": "openai-compatible-chat-completions",
+    }
+
+
+def skill_context(stage: str) -> str:
+    source = LLM_STAGES.get(stage)
+    if source is None or not source.is_file():
+        raise ValueError("不支持的大模型阶段")
+    context = source.read_text(encoding="utf-8")
+    if stage == "test-yaml-to-api-spec":
+        reference = REPO_ROOT / "skills" / "api-test-automation-workflow" / "references" / "generator-spec.md"
+        context += "\n\n" + reference.read_text(encoding="utf-8")
+    return context
+
+
+def stage_instruction(stage: str) -> str:
+    instructions = {
+        "requirement-to-tad": "输出结构化中文 TAD Markdown，包含背景、TRD、STD、规则编号、待确认项和追溯关系。只输出正文。",
+        "tad-to-test-yaml": "输出可解析 YAML，根节点为 TestCases；包含 caseId、level、before、module、tags、thought、steps、state。优先覆盖接口和服务端场景。只输出 YAML。",
+        "test-yaml-to-api-spec": "输出可供 api-test-scaffold-generator.jar 使用的 generation-spec YAML。首次生成就处理固定值、枚举、环境数据、唯一值和运行时业务数据：易失 ID 使用 __DATA_REF，写全 fieldHints 和 preparationLines；同时保留 executableization-plan 二次加工入口。Java 类型证据不足时使用 com.example 占位并在 thought 标记待校准。只输出 YAML。",
+        "api-feedback": "根据执行证据输出 api.feedback.yaml，区分 passed、failed、blocked、skipped，包含 stage、rootCause、evidence、changes、upstreamFeedback 和 goldenSample。只输出 YAML。",
+    }
+    return instructions[stage]
+
+
+def call_llm(stage: str, inputs: dict[str, Any]) -> dict[str, Any]:
+    status = llm_status()
+    api_key = os.environ.get("LLM_API_KEY")
+    if not api_key:
+        raise ValueError("尚未配置 LLM_API_KEY，请按 README 设置后重启服务")
+    base_url = str(status["baseUrl"]).rstrip("/")
+    endpoint = f"{base_url}/chat/completions"
+    prompt = json.dumps(inputs, ensure_ascii=False, indent=2)
+    payload = {
+        "model": status["model"],
+        "messages": [
+            {"role": "system", "content": "你是测试工程工作流执行器。严格遵循下面的 Skill 规则。\n\n" + skill_context(stage)},
+            {"role": "user", "content": stage_instruction(stage) + "\n\n输入：\n" + prompt},
+        ],
+    }
+    request = Request(
+        endpoint,
+        data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
+        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urlopen(request, timeout=180) as response:
+            result = json.loads(response.read().decode("utf-8"))
+    except HTTPError as error:
+        detail = error.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"大模型接口返回 HTTP {error.code}: {detail[:600]}") from error
+    except URLError as error:
+        raise RuntimeError(f"无法连接大模型接口：{error.reason}") from error
+    try:
+        content = result["choices"][0]["message"]["content"]
+    except (KeyError, IndexError, TypeError) as error:
+        raise RuntimeError("大模型响应缺少 choices[0].message.content") from error
+    if isinstance(content, list):
+        content = "\n".join(str(item.get("text", "")) if isinstance(item, dict) else str(item) for item in content)
+    text = str(content).strip()
+    if text.startswith("```"):
+        lines = text.splitlines()
+        if lines and lines[-1].strip() == "```":
+            text = "\n".join(lines[1:-1])
+    return {"stage": stage, "model": status["model"], "content": text}
 
 
 def inspect_project(project: Path) -> dict[str, Any]:
@@ -158,6 +240,9 @@ class LabHandler(BaseHTTPRequestHandler):
             if parsed.path == "/api/health":
                 self.send_json({"status": "ok", "jar": JAR_PATH.is_file(), "version": "1.0.0"})
                 return
+            if parsed.path == "/api/llm/status":
+                self.send_json(llm_status())
+                return
             if parsed.path == "/api/example-spec":
                 self.send_json({"spec": EXAMPLE_SPEC.read_text(encoding="utf-8")})
                 return
@@ -180,6 +265,13 @@ class LabHandler(BaseHTTPRequestHandler):
                 project = Path(str(body.get("project", ""))).expanduser().resolve()
                 session = prepare_session(project, str(body.get("mode", "copy")))
                 self.send_json(self.session_payload(session), HTTPStatus.CREATED)
+                return
+            if self.path == "/api/llm/execute":
+                stage = str(body.get("stage", ""))
+                inputs = body.get("inputs", {})
+                if not isinstance(inputs, dict):
+                    raise ValueError("inputs 必须是对象")
+                self.send_json(call_llm(stage, inputs))
                 return
             if self.path == "/api/generate":
                 self.handle_generate(body)

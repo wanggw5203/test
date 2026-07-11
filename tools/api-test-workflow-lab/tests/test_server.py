@@ -1,4 +1,5 @@
 import importlib.util
+import os
 import sys
 import tempfile
 import unittest
@@ -14,6 +15,20 @@ SPEC.loader.exec_module(server)
 
 
 class WorkflowLabServerTest(unittest.TestCase):
+    def test_llm_status_is_safe_without_key(self):
+        previous = os.environ.pop("LLM_API_KEY", None)
+        try:
+            status = server.llm_status()
+            self.assertFalse(status["configured"])
+            self.assertNotIn("apiKey", status)
+        finally:
+            if previous is not None:
+                os.environ["LLM_API_KEY"] = previous
+
+    def test_llm_stage_loads_skill_context(self):
+        context = server.skill_context("requirement-to-tad")
+        self.assertIn("name: requirement-to-tad", context)
+
     def test_inspect_project_counts_framework_evidence(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

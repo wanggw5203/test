@@ -17,6 +17,7 @@
       </div>
     </div>
     <div class="header-actions">
+      <span id="llmBadge" class="session-badge">大模型未检查</span>
       <span id="sessionBadge" class="session-badge">未创建会话</span>
       <button class="icon-button" id="resetButton" title="重置页面" aria-label="重置页面">
         <i data-lucide="rotate-ccw"></i>
@@ -27,22 +28,22 @@
   <div class="app-shell">
     <nav class="stage-nav" aria-label="流程阶段">
       <button class="stage active" data-stage="inspect">
-        <span class="stage-index">1</span><span>框架取证</span><i data-lucide="chevron-right"></i>
+        <span class="stage-index">1</span><span>需求输入</span><i data-lucide="chevron-right"></i>
       </button>
       <button class="stage" data-stage="spec">
-        <span class="stage-index">2</span><span>生成规格</span><i data-lucide="chevron-right"></i>
+        <span class="stage-index">2</span><span>TAD 分析</span><i data-lucide="chevron-right"></i>
       </button>
       <button class="stage" data-stage="generate">
-        <span class="stage-index">3</span><span>生成校验</span><i data-lucide="chevron-right"></i>
+        <span class="stage-index">3</span><span>功能用例</span><i data-lucide="chevron-right"></i>
       </button>
       <button class="stage" data-stage="data">
-        <span class="stage-index">4</span><span>数据加工</span><i data-lucide="chevron-right"></i>
+        <span class="stage-index">4</span><span>接口自动化</span><i data-lucide="chevron-right"></i>
       </button>
       <button class="stage" data-stage="compile">
-        <span class="stage-index">5</span><span>编译运行</span><i data-lucide="chevron-right"></i>
+        <span class="stage-index">5</span><span>执行测试</span><i data-lucide="chevron-right"></i>
       </button>
       <button class="stage" data-stage="feedback">
-        <span class="stage-index">6</span><span>反馈闭环</span><i data-lucide="chevron-right"></i>
+        <span class="stage-index">6</span><span>报告反馈</span><i data-lucide="chevron-right"></i>
       </button>
     </nav>
 
@@ -66,20 +67,32 @@
           <div class="pane-header">
             <div>
               <span class="eyebrow">GENERATION SPEC</span>
-              <h2>接口脚手架规格</h2>
+              <h2 id="documentTitle">原始需求</h2>
             </div>
             <div class="segmented" role="group" aria-label="编辑器视图">
-              <button class="selected" data-view="spec">YAML</button>
+              <button class="selected" data-view="requirement">需求</button>
+              <button data-view="tad">TAD</button>
+              <button data-view="cases">用例</button>
+              <button data-view="spec">接口规格</button>
               <button data-view="plan">加工计划</button>
+              <button data-view="report">报告</button>
             </div>
           </div>
-          <textarea id="specEditor" aria-label="生成规格 YAML" spellcheck="false"></textarea>
+          <textarea id="requirementEditor" class="document-editor" aria-label="原始需求" spellcheck="false"></textarea>
+          <textarea id="tadEditor" class="document-editor hidden" aria-label="TAD 测试分析" spellcheck="false"></textarea>
+          <textarea id="casesEditor" class="document-editor hidden" aria-label="功能测试用例 YAML" spellcheck="false"></textarea>
+          <textarea id="specEditor" class="document-editor hidden" aria-label="接口生成规格 YAML" spellcheck="false"></textarea>
           <pre id="planViewer" class="plan-viewer hidden"></pre>
+          <textarea id="reportEditor" class="document-editor hidden" aria-label="接口自动化反馈报告" spellcheck="false"></textarea>
           <div class="action-bar">
-            <button id="exampleButton" class="button ghost"><i data-lucide="file-input"></i>载入样例</button>
+            <button id="exampleButton" class="button ghost"><i data-lucide="file-input"></i>载入完整 Demo</button>
             <div class="action-spacer"></div>
-            <button id="generateButton" class="button primary" disabled><i data-lucide="package-plus"></i>生成脚手架</button>
-            <button id="validateButton" class="button secondary" disabled><i data-lucide="shield-check"></i>严格校验</button>
+            <button id="generateTadButton" class="button primary context-action" data-for-view="requirement"><i data-lucide="sparkles"></i>生成 TAD</button>
+            <button id="generateCasesButton" class="button primary context-action hidden" data-for-view="tad"><i data-lucide="sparkles"></i>生成用例</button>
+            <button id="generateSpecButton" class="button primary context-action hidden" data-for-view="cases"><i data-lucide="sparkles"></i>生成接口规格</button>
+            <button id="generateButton" class="button primary context-action hidden" data-for-view="spec" disabled><i data-lucide="package-plus"></i>生成脚手架</button>
+            <button id="validateButton" class="button secondary context-action hidden" data-for-view="spec" disabled><i data-lucide="shield-check"></i>严格校验</button>
+            <button id="generateReportButton" class="button primary context-action hidden" data-for-view="report"><i data-lucide="sparkles"></i>生成报告</button>
           </div>
         </section>
 

@@ -4,6 +4,7 @@ const state = {
     ? "demo"
     : ["127.0.0.1", "localhost", "::1"].includes(window.location.hostname) ? "local" : "demo",
   gates: { inspect: null, generate: null, validate: null, compile: null, run: null },
+  lastExecution: null,
 };
 
 const $ = (id) => document.getElementById(id);
@@ -28,6 +29,18 @@ async function demoApi(path, options = {}) {
     samples: ["src/test/java/example/RecordQueryTests.java", "src/test/java/example/RecordCreateTests.java"],
   };
   if (path === "/api/health") return { status: "ok", jar: false, demo: true, version: "1.0.0" };
+  if (path === "/api/llm/status") return { configured: true, model: "demo-model", protocol: "browser-simulation" };
+  if (path === "/api/llm/execute") {
+    const stage = body.stage;
+    const outputs = {
+      "requirement-to-tad": `# TAD：记录创建\n\n## TRD\n- TRD-01：管理员提交完整且有效的创建请求时，系统创建记录并返回记录 ID。\n- TRD-02：审核员无创建权限，请求应被拒绝且不产生数据。\n- TRD-03：名称在同一上级记录下唯一。\n\n## STD\n- STD-API-01：创建接口校验 parent_id、role_code、record_type、name。\n- STD-API-02：parent_id 必须来自当前环境有效数据。\n- STD-API-03：重复提交不得产生重复记录。\n\n## 待确认项\n- 错误码与 HTTP 状态码映射待接口契约确认。`,
+      "tad-to-test-yaml": `TestCases:\n  - name: 管理员创建标准记录成功\n    caseId: API-REC-001\n    level: P0\n    before: 准备有效上级记录，生成唯一名称\n    module: 功能用例/记录管理/创建/接口\n    tags: 接口\n    thought: 来源 TRD-01、STD-API-01~02\n    steps:\n      - step: 管理员提交完整创建请求\n        expected: 返回成功状态和新记录 ID，记录可查询\n    state: valid\n  - name: 无效上级记录创建失败\n    caseId: API-REC-002\n    level: P1\n    before: 使用不存在的上级记录 ID\n    module: 功能用例/记录管理/创建/接口\n    tags: 接口\n    thought: 来源 TRD-01、STD-API-02\n    steps:\n      - step: 提交无效 parent_id\n        expected: 返回明确业务错误且不创建记录\n    state: valid`,
+      "test-yaml-to-api-spec": await (await fetch("./sample-spec.yaml")).text(),
+      "api-feedback": `feedback:\n  apiCode: api_record_create\n  sourceCaseIds: [API-REC-001]\n  environment: demo\n  result: passed\n  stage: assertion\n  rootCause: none\n  evidence:\n    - Manifest strict validation passed\n    - Test compilation gate passed\n  changes:\n    - type: first-pass-data-strategy\n      summary: parent_id 使用运行时数据引用，role_code 使用显式枚举\n  upstreamFeedback: []\n  goldenSample:\n    eligible: false\n    reason: 在线演练未调用真实接口`,
+    };
+    if (!outputs[stage]) throw new Error("不支持的演练 Skill 阶段");
+    return { stage, model: "demo-model", content: outputs[stage] };
+  }
   if (path === "/api/example-spec") {
     const response = await fetch("./sample-spec.yaml");
     return { spec: await response.text() };
@@ -151,10 +164,89 @@ function renderSession(session) {
 
 async function loadExample() {
   try {
-    const data = await api("/api/example-spec");
+    const [requirementResponse, data] = await Promise.all([
+      fetch("./sample-requirement.md"),
+      api("/api/example-spec"),
+    ]);
+    $("requirementEditor").value = await requirementResponse.text();
+    $("tadEditor").value = "";
+    $("casesEditor").value = "";
     $("specEditor").value = data.spec;
-    toast("已载入生成规格样例");
+    $("reportEditor").value = "";
+    switchView("requirement");
+    toast("已载入完整实践 Demo");
   } catch (error) { appendError("载入样例失败", error); }
+}
+
+const viewTitles = {
+  requirement: "原始需求", tad: "TAD 测试分析", cases: "功能测试用例",
+  spec: "接口自动化生成规格", plan: "二次加工计划", report: "执行报告与反馈",
+};
+
+function switchView(view) {
+  document.querySelectorAll(".segmented button").forEach((item) => item.classList.toggle("selected", item.dataset.view === view));
+  const targets = { requirement: "requirementEditor", tad: "tadEditor", cases: "casesEditor", spec: "specEditor", plan: "planViewer", report: "reportEditor" };
+  Object.entries(targets).forEach(([name, id]) => $(id).classList.toggle("hidden", name !== view));
+  document.querySelectorAll(".context-action").forEach((button) => button.classList.toggle("hidden", button.dataset.forView !== view));
+  $("documentTitle").textContent = viewTitles[view];
+}
+
+async function executeSkill(stage, inputs, targetId, nextView, label) {
+  const buttonMap = {
+    "requirement-to-tad": $("generateTadButton"),
+    "tad-to-test-yaml": $("generateCasesButton"),
+    "test-yaml-to-api-spec": $("generateSpecButton"),
+    "api-feedback": $("generateReportButton"),
+  };
+  const button = buttonMap[stage];
+  setBusy(button, true, "大模型处理中");
+  try {
+    const result = await api("/api/llm/execute", { method: "POST", body: JSON.stringify({ stage, inputs }) });
+    $(targetId).value = result.content;
+    appendLog(label, { success: true, output: `Skill: ${stage}\nModel: ${result.model}` });
+    switchView(nextView);
+    const stageMap = { "requirement-to-tad": "spec", "tad-to-test-yaml": "generate", "test-yaml-to-api-spec": "data", "api-feedback": "feedback" };
+    activateStage(stageMap[stage]);
+    toast(`${label}完成`);
+  } catch (error) { appendError(`${label}失败`, error); }
+  finally { setBusy(button, false); }
+}
+
+function generateTad() {
+  const requirement = $("requirementEditor").value.trim();
+  if (!requirement) { toast("请先输入需求", true); return; }
+  executeSkill("requirement-to-tad", { requirement }, "tadEditor", "tad", "TAD 生成");
+}
+
+function generateCases() {
+  const tad = $("tadEditor").value.trim();
+  if (!tad) { toast("请先生成或输入 TAD", true); return; }
+  executeSkill("tad-to-test-yaml", { tad }, "casesEditor", "cases", "功能用例生成");
+}
+
+function generateApiSpec() {
+  const cases = $("casesEditor").value.trim();
+  if (!cases) { toast("请先生成或输入功能用例", true); return; }
+  executeSkill("test-yaml-to-api-spec", {
+    requirement: $("requirementEditor").value,
+    tad: $("tadEditor").value,
+    testCases: cases,
+    projectEvidence: state.session?.evidence || null,
+    firstPassExecutableization: true,
+    preserveSecondPassEntry: true,
+  }, "specEditor", "spec", "接口规格生成");
+}
+
+function generateReport() {
+  executeSkill("api-feedback", {
+    requirement: $("requirementEditor").value,
+    tad: $("tadEditor").value,
+    testCases: $("casesEditor").value,
+    generationSpec: $("specEditor").value,
+    executableizationPlan: $("planViewer").textContent,
+    execution: state.lastExecution,
+    gates: state.gates,
+  }, "reportEditor", "report", "执行报告生成");
 }
 
 async function inspect() {
@@ -197,7 +289,7 @@ async function generate() {
     appendLog("脚手架生成", result);
     updateGate("generate", result.success);
     if (result.session) renderSession(result.session);
-    if (result.success) { activateStage("generate"); toast("脚手架生成成功"); }
+    if (result.success) { activateStage("data"); toast("脚手架生成成功"); }
     else toast("生成失败，请查看日志", true);
   } catch (error) { updateGate("generate", false); appendError("脚手架生成失败", error); }
   finally { setBusy(button, false); }
@@ -222,7 +314,9 @@ async function compileTests() {
     activateStage("compile");
     const result = await api("/api/compile", { method: "POST", body: JSON.stringify({ sessionId: state.session.id }) });
     appendLog("Maven 测试编译", result);
+    state.lastExecution = { type: "compile", ...result };
     updateGate("compile", result.success);
+    if (result.success) switchView("report");
     toast(result.success ? "测试编译通过" : "测试编译失败", !result.success);
   } catch (error) { updateGate("compile", false); appendError("测试编译失败", error); }
   finally { setBusy(button, false); }
@@ -238,24 +332,26 @@ async function runTest() {
       body: JSON.stringify({ sessionId: state.session.id, className: $("testClass").value, confirmed: true }),
     });
     appendLog("目标单例运行", result);
+    state.lastExecution = { type: "test", ...result };
     updateGate("run", result.success, result.success ? "通过" : "失败");
     activateStage("feedback");
+    switchView("report");
     toast(result.success ? "目标单例通过" : "目标单例失败", !result.success);
   } catch (error) { updateGate("run", false); appendError("目标单例运行失败", error); }
   finally { setBusy(button, false); }
 }
 
 document.querySelectorAll(".segmented button").forEach((button) => {
-  button.addEventListener("click", () => {
-    document.querySelectorAll(".segmented button").forEach((item) => item.classList.toggle("selected", item === button));
-    $("specEditor").classList.toggle("hidden", button.dataset.view !== "spec");
-    $("planViewer").classList.toggle("hidden", button.dataset.view !== "plan");
-  });
+  button.addEventListener("click", () => switchView(button.dataset.view));
 });
 
 $("inspectButton").addEventListener("click", inspect);
 $("sessionButton").addEventListener("click", createSession);
 $("exampleButton").addEventListener("click", loadExample);
+$("generateTadButton").addEventListener("click", generateTad);
+$("generateCasesButton").addEventListener("click", generateCases);
+$("generateSpecButton").addEventListener("click", generateApiSpec);
+$("generateReportButton").addEventListener("click", generateReport);
 $("generateButton").addEventListener("click", generate);
 $("validateButton").addEventListener("click", validate);
 $("compileButton").addEventListener("click", compileTests);
@@ -267,6 +363,10 @@ async function bootstrap() {
   if (window.lucide) lucide.createIcons();
   try {
     const health = await api("/api/health");
+    const llm = await api("/api/llm/status");
+    $("llmBadge").textContent = `${llm.model} · ${llm.configured ? "大模型就绪" : "待配置"}`;
+    $("llmBadge").classList.toggle("status", llm.configured);
+    $("llmBadge").classList.toggle("success", llm.configured);
     $("connectionStatus").classList.add("online");
     $("connectionStatus").lastChild.textContent = state.mode === "demo"
       ? " GitHub Pages · 演练模式"

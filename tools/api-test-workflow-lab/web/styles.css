@@ -85,14 +85,14 @@ input:focus, textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 2px v
 .pane-header.compact { height: 58px; }
 .eyebrow { color: var(--green); font-size: 9px; font-weight: 750; }
 h2 { margin: 2px 0 0; font-size: 14px; }
-.segmented { display: flex; padding: 2px; border: 1px solid var(--line); background: var(--surface-2); border-radius: 5px; }
+.segmented { display: flex; max-width: 62%; overflow-x: auto; padding: 2px; border: 1px solid var(--line); background: var(--surface-2); border-radius: 5px; }
 .segmented button { height: 26px; padding: 0 10px; border: 0; background: transparent; color: var(--muted); border-radius: 3px; font-size: 11px; }
 .segmented button.selected { background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
-#specEditor, .plan-viewer { display: block; width: 100%; height: 470px; margin: 0; padding: 14px 16px; border: 0; border-radius: 0; resize: vertical; background: #fbfcfd; font: 12px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; tab-size: 2; white-space: pre; overflow: auto; }
-#specEditor:focus { box-shadow: inset 0 0 0 1px var(--blue); }
+.document-editor, .plan-viewer { display: block; width: 100%; height: 470px; margin: 0; padding: 14px 16px; border: 0; border-radius: 0; resize: vertical; background: #fbfcfd; font: 12px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; tab-size: 2; white-space: pre; overflow: auto; }
+.document-editor:focus { box-shadow: inset 0 0 0 1px var(--blue); }
 .plan-viewer { color: #34424d; }
 .hidden { display: none !important; }
-.action-bar { min-height: 52px; padding: 8px 10px; border-top: 1px solid var(--line); gap: 8px; }
+.action-bar { min-height: 52px; padding: 8px 10px; border-top: 1px solid var(--line); gap: 8px; flex-wrap: wrap; }
 .action-spacer { flex: 1; }
 .status { padding: 4px 7px; border-radius: 4px; font-size: 10px; font-weight: 700; }
 .status.neutral { background: #eef1f3; color: var(--muted); }
@@ -152,7 +152,7 @@ h2 { margin: 2px 0 0; font-size: 14px; }
   .toolbar-band { align-items: stretch; flex-wrap: wrap; }
   .path-field { flex-basis: 100%; grid-template-columns: 1fr; gap: 4px; }
   .work-grid { grid-template-columns: 1fr; }
-  #specEditor, .plan-viewer { height: 390px; }
+  .document-editor, .plan-viewer { height: 390px; }
   .evidence-pane { order: 2; }
   .session-badge { display: none; }
   .button { min-width: 0; }

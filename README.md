@@ -68,7 +68,7 @@ java -jar dist/api-test-scaffold-generator.jar example
 java -jar dist/api-test-scaffold-generator.jar generate --spec generation-spec.yaml --project /path/to/project
 ```
 
-## 页面化实践
+## 完整页面化实践
 
 启动本地实践台：
 
@@ -76,7 +76,9 @@ java -jar dist/api-test-scaffold-generator.jar generate --spec generation-spec.y
 python3 tools/api-test-workflow-lab/server.py
 ```
 
-打开 `http://127.0.0.1:8765`，可以在页面完成框架取证、生成规格编辑、脚手架生成、Manifest 校验、加工计划查看、测试编译和目标单例运行。默认通过临时 Git 副本隔离业务项目；运行真实单例前必须显式确认。
+打开 `http://127.0.0.1:8765`，可以在页面完成需求输入、大模型生成 TAD、TAD 转功能用例、功能用例转接口自动化规格、脚手架生成、首次数据加工、二次加工计划、Manifest 校验、测试编译、目标单例和反馈报告。默认通过临时 Git 副本隔离业务项目；运行真实单例前必须显式确认。
+
+详细操作见 [AI 测试闭环实践台说明](tools/api-test-workflow-lab/README.md)。
 
 推送到 GitHub 后，Pages 工作流会发布在线演练版。在线版可直接完成页面流程练习，但受浏览器安全边界限制，不读取本机项目、不执行 JAR/Maven、不调用真实接口；真实执行仍使用本地地址。
 
