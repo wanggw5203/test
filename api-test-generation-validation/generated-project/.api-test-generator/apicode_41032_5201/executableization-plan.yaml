@@ -1,0 +1,45 @@
+schemaVersion: 1
+apiCode: apicode_41032_5201
+status: pending
+projectRoot: /Users/wangguangwen/IdeaProjects/knowledge/requirement-to-atc-skills/api-test-generation-validation/generated-project
+manifest: .api-test-generator/apicode_41032_5201/scaffold-manifest.yaml
+cases:
+  - name: 01_提交审核接口契约占位场景
+    thought: 仅验证接口契约到脚手架的映射：PUT /admin/third_employment/supplier/process/audit_submit，请求SupplierAuditSubmitRO包含employmentState、positionId、ids且源码注释均为必传，响应为JsonResponse<Boolean>。有效枚举、真实ID、成功前置状态和具体响应值没有独立证据，当前均为待确认占位，不作为可执行业务用例。
+    requestRef: 01_提交审核接口契约占位场景.json
+    expectRef: 01_提交审核接口契约占位场景.json
+    fields:
+      - field: employment_state
+        kind: business-enum
+        semantic: SupplierAuditSubmitRO.employmentState，必传，具体枚举待接口字典确认
+        valueSource: SupplierAuditSubmitRO源码注释BM_HZRYLB
+        placeholder: __TODO_EMPLOYMENT_STATE__
+        required: true
+        decision: pending
+      - field: position_id
+        kind: environment-base-data
+        semantic: SupplierAuditSubmitRO.positionId，必传，合法岗位来源待确认
+        valueSource: SupplierAuditSubmitRO源码
+        placeholder: __TODO_POSITION_ID__
+        required: true
+        decision: pending
+      - field: ids
+        kind: runtime-business-data
+        semantic: SupplierAuditSubmitRO.ids，必传，满足提交审核状态的入职单ID来源待确认
+        valueSource: SupplierAuditSubmitRO源码
+        placeholder: __TODO_ENTRY_ID__
+        required: true
+        decision: pending
+      - field: response
+        kind: default
+        semantic: JsonResponse<Boolean>证明结构，不证明成功code和data取值
+        valueSource: ThirdEmploymentApi与JsonResponse源码
+        placeholder: null
+        required: true
+        decision: pending
+nextSkill: make-api-tests-executable
+rules:
+  - preserve explicit negative values
+  - resolve enum values only from explicit mappings
+  - replace volatile IDs with runtime data references
+  - do not change business expectations to match failures

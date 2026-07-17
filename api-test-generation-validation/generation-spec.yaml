@@ -1,0 +1,89 @@
+schemaVersion: 1
+apiCode: apicode_41032_5201
+description: 合作用工-提交审核首轮接口契约脚手架验证
+packageName: com.pupu.third.employment.apicode_41032_5201
+resourcePackage: com.pupu.third.employment.apicode_41032_5201
+className: SupplierEntryProcessAuditSubmitGeneratedTests
+author: AI
+dataKey: 合作用工-提交审核-契约验证
+template: query
+environments:
+  - pre
+  - test
+java:
+  baseClass: BaseTest
+  imports:
+    - com.pupu.put.common.BaseTest
+    - com.pupu.put.configuration.dataprovider.DataDriveUtil
+    - com.pupu.put.configuration.dto.FrameConfigInfo
+    - com.pupu.third.employment.api.ThirdEmploymentApi
+    - com.pupu.third.employment.dto.JsonResponse
+    - com.pupu.third.employment.ro.SupplierAuditSubmitRO
+    - java.lang.reflect.Method
+    - java.util.List
+    - org.apache.commons.collections4.CollectionUtils
+    - org.springframework.beans.factory.annotation.Autowired
+    - org.testng.Assert
+    - org.testng.annotations.DataProvider
+    - org.testng.annotations.Test
+  classAnnotations: []
+  classMembers:
+    - '@Autowired'
+    - 'private ThirdEmploymentApi thirdEmploymentApi;'
+  dataProviderName: auditSubmitContractDataProvider
+  dataProviderMethod: prepareTestData
+  dataLoaderExpression: 'DataDriveUtil.loadTestData(method, "${dataKey}", true)'
+  testMethodName: auditSubmitContractTests
+  testParameters:
+    - FrameConfigInfo config
+    - SupplierAuditSubmitRO request
+    - JsonResponse<Boolean> expect
+  setupLines: []
+  preparationLines: []
+  actualType: JsonResponse<Boolean>
+  actualExpression: thirdEmploymentApi.auditSubmit(request)
+  diffExpression: DataDriveUtil.diffFieldValue(expect, actual)
+  assertionLines: []
+cases:
+  - name: 01_提交审核接口契约占位场景
+    thought: "仅验证接口契约到脚手架的映射：PUT /admin/third_employment/supplier/process/audit_submit，请求SupplierAuditSubmitRO包含employmentState、positionId、ids且源码注释均为必传，响应为JsonResponse<Boolean>。有效枚举、真实ID、成功前置状态和具体响应值没有独立证据，当前均为待确认占位，不作为可执行业务用例。"
+    mockId: null
+    users: []
+    requestRef: 01_提交审核接口契约占位场景.json
+    expectRef: 01_提交审核接口契约占位场景.json
+    request:
+      base:
+        employment_state: __TODO_EMPLOYMENT_STATE__
+        position_id: __TODO_POSITION_ID__
+        ids:
+          - __TODO_ENTRY_ID__
+      overrides: {}
+    expect:
+      base:
+        code: __TODO_RESPONSE_CODE__
+        data: __TODO_RESPONSE_BOOLEAN__
+      overrides: {}
+    fieldHints:
+      - field: employment_state
+        kind: business-enum
+        semantic: SupplierAuditSubmitRO.employmentState，必传，具体枚举待接口字典确认
+        valueSource: SupplierAuditSubmitRO源码注释BM_HZRYLB
+        placeholder: __TODO_EMPLOYMENT_STATE__
+        required: true
+      - field: position_id
+        kind: environment-base-data
+        semantic: SupplierAuditSubmitRO.positionId，必传，合法岗位来源待确认
+        valueSource: SupplierAuditSubmitRO源码
+        placeholder: __TODO_POSITION_ID__
+        required: true
+      - field: ids
+        kind: runtime-business-data
+        semantic: SupplierAuditSubmitRO.ids，必传，满足提交审核状态的入职单ID来源待确认
+        valueSource: SupplierAuditSubmitRO源码
+        placeholder: __TODO_ENTRY_ID__
+        required: true
+      - field: response
+        kind: default
+        semantic: JsonResponse<Boolean>证明结构，不证明成功code和data取值
+        valueSource: ThirdEmploymentApi与JsonResponse源码
+        required: true

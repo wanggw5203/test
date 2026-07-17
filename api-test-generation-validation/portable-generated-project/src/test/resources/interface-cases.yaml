@@ -1,0 +1,6 @@
+cases:
+  - name: 01_提交审核接口契约占位场景
+    request: 01_contract_placeholder_req.json
+    expect: 01_contract_placeholder_exp.json
+    state: pending
+    evidence: "源码仅证明请求字段和JsonResponse<Boolean>结构；有效枚举、合法ID、业务前置及响应值待独立接口用例或接口文档补充。"

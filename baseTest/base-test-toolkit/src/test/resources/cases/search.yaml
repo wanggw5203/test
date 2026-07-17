@@ -1,0 +1,12 @@
+testDataSuite:
+  description: search examples
+  cases:
+    - name: search by keyword
+      enabled: true
+      thought: verifies typed request and expected response loading
+      users:
+        - test-user
+      request:
+        - search-request.json5
+      expect:
+        - search-response.json5

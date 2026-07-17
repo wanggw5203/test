@@ -1,0 +1,5 @@
+{
+  // JSON5-style comments and trailing commas are supported.
+  "keyword": "coffee",
+  "limit": 10,
+}

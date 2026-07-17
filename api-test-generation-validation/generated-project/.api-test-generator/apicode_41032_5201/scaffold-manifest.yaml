@@ -1,0 +1,28 @@
+schemaVersion: 1
+generatorVersion: 1.0.0
+apiCode: apicode_41032_5201
+template: query
+generatedAt: '2026-07-11T16:12:49.941739Z'
+sourceSpec: /Users/wangguangwen/IdeaProjects/knowledge/requirement-to-atc-skills/api-test-generation-validation/generation-spec.yaml
+testClass: src/test/java/com/pupu/third/employment/apicode_41032_5201/SupplierEntryProcessAuditSubmitGeneratedTests.java
+suiteFile: src/test/resources/com/pupu/third/employment/apicode_41032_5201/合作用工-提交审核-契约验证.yaml
+executableizationPlan: .api-test-generator/apicode_41032_5201/executableization-plan.yaml
+files:
+  - path: src/test/java/com/pupu/third/employment/apicode_41032_5201/SupplierEntryProcessAuditSubmitGeneratedTests.java
+    sha256: 28e66d31b81ffa84611fc2ef6194516785a1e250879fc1149d11469e154f3718
+  - path: src/test/resources/com/pupu/third/employment/apicode_41032_5201/合作用工-提交审核-契约验证.yaml
+    sha256: 0746476779d8fba4510abdc56188aca27e2a13c3ba534d12e138a8288070fbcb
+  - path: src/test/resources/com/pupu/third/employment/apicode_41032_5201/01_提交审核接口契约占位场景_req_pre.json5
+    sha256: 30bd7ea89530d0a14cc616bdcb4e6955381ab49ac649e1492af28f899927d4ab
+  - path: src/test/resources/com/pupu/third/employment/apicode_41032_5201/01_提交审核接口契约占位场景_exp_pre.json5
+    sha256: 0283c7b4f8004bf5cfe9f9f661a1ba8ac295e8705320ac6b47ce6e831406c631
+  - path: src/test/resources/com/pupu/third/employment/apicode_41032_5201/01_提交审核接口契约占位场景_req_test.json5
+    sha256: 37b773c795b4e2999b5a74e71a68c492379e54ecd27a604d5c6b30c6bc402975
+  - path: src/test/resources/com/pupu/third/employment/apicode_41032_5201/01_提交审核接口契约占位场景_exp_test.json5
+    sha256: f42473ff7980b3f1bfb14805c6e90bf8985eeda03554220a51df507fb237f1a9
+  - path: .api-test-generator/apicode_41032_5201/executableization-plan.yaml
+    sha256: a4bc00c1634635adba606de393b3476e03fa13ee8c10fdab5d15b3650c3ca7b1
+handoff:
+  status: pending-executableization
+  skill: make-api-tests-executable
+  next: process field hints, wire runtime data, compile and run the target test

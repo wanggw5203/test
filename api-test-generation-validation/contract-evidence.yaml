@@ -1,0 +1,38 @@
+contract:
+  apiCode: 41032_5201
+  name: 合作用工-提交审核
+  httpMethod: PUT
+  path: /admin/third_employment/supplier/process/audit_submit
+  apiClass: com.pupu.third.employment.api.ThirdEmploymentApi
+  apiMethod: auditSubmit
+  requestType: com.pupu.third.employment.ro.SupplierAuditSubmitRO
+  requestFields:
+    - javaName: employmentState
+      jsonNameObservedFromConvention: employment_state
+      javaType: String
+      requiredBySourceComment: true
+      unresolved: 业务枚举BM_HZRYLB的合法取值
+    - javaName: positionId
+      jsonNameObservedFromConvention: position_id
+      javaType: Long
+      requiredBySourceComment: true
+      unresolved: 合法岗位ID来源
+    - javaName: ids
+      jsonNameObservedFromConvention: ids
+      javaType: List<String>
+      requiredBySourceComment: true
+      unresolved: 可提交审核的入职单ID及前置状态
+  responseType: com.pupu.third.employment.dto.JsonResponse<Boolean>
+  responseFields:
+    - code: Integer
+    - msg: String
+    - data: Boolean
+    - error_message: String
+    - error_code: String
+  unresolved:
+    - JSON字段采用snake_case的配置证据需由框架配置或序列化验证补充
+    - 有效员工类型枚举
+    - 有效岗位ID
+    - 成功请求所需业务前置状态
+    - 成功及失败响应的具体code、msg、data
+    - 鉴权用户和请求头
