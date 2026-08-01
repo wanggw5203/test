@@ -20,7 +20,7 @@ TestCases:
     steps:
       - step: ""
         expected: ""
-    state: valid
+    state: 未评审
 ```
 
 部分知识库文件没有 `caseId`。目标工具接受时保留该字段；只有本地规范稳定省略时才省略。
@@ -52,7 +52,7 @@ TestCases:
 - `thought`：引用来源规则、章节或技术证据，例如 `来源 TRD §2.2-3~5`。
 - `steps.step`：一个操作或刺激。
 - `steps.expected`：具体可观察结果。
-- `state`：可执行用例使用 `valid`；只有本地结构支持时才使用废弃或草稿状态。
+- `state`：表示用例评审状态。新生成用例固定使用 `未评审`；只有用户明确要求其他评审状态时才改变，不得用 `valid` 代替评审状态。
 
 ## 生成规则
 
@@ -80,6 +80,7 @@ TestCases:
 - YAML 能成功解析。
 - `TestCases` 是列表，每条用例包含 `name`、`level`、`before`、`module`、`tags`、`thought`、`steps` 和 `state`。
 - 每个步骤包含 `step` 和 `expected`。
+- 每条新生成用例的 `state` 均为 `未评审`。
 - 用例名唯一；存在 `caseId` 时其值唯一。
 - P0 覆盖全部主流程及原文明确列出的枚举、节点和状态。
 - 每条 `thought` 都指向 TAD、TRD 或 STD 来源。

@@ -1,0 +1,8 @@
+// 01_提交审核接口契约占位场景 - pre request
+{
+  "employment_state": "__TODO_EMPLOYMENT_STATE__",
+  "position_id": "__TODO_POSITION_ID__",
+  "ids": [
+    "__TODO_ENTRY_ID__"
+  ]
+}

@@ -73,4 +73,8 @@ public final class ConfigLoader {
     public static ObjectMapper jsonMapper() {
         return JSON.copy();
     }
+
+    public static ObjectMapper strictJsonMapper() {
+        return JSON.copy().registerModule(new StrictTypeModule());
+    }
 }

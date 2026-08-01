@@ -43,6 +43,7 @@
                 <version>3.13.0</version>
                 <configuration>
                     <parameters>true</parameters>
+                    <proc>none</proc>
                 </configuration>
             </plugin>
             <plugin>
