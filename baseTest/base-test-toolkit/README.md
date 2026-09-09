@@ -8,6 +8,73 @@
 - [能力映射表](CAPABILITY-MAP.md)：原能力对应到通用类、SPI 或不迁移项。
 - [学习实践路线](LEARNING-GUIDE.md)：按测试生命周期逐步熟悉框架。
 
+## 快速上手（开箱即用）
+
+环境要求：JDK 17+、Maven 3.9+。
+
+```bash
+# Linux / macOS / Git Bash
+mvn test
+
+# Windows CMD
+mvn test
+```
+
+预期输出：`Tests run: 12, Failures: 0, Errors: 0`。
+
+入门只需读一个文件：`src/test/java/io/testkit/basetest/demo/QuickStartDemoTest.java`。
+它在一个类里演示了一条测试的完整生命周期：
+
+```
+YAML 数据驱动加载 -> @UseIdentity 身份租借 -> Mock 场景
+    -> 业务调用 -> JsonDiff 严格断言（忽略动态字段）
+    -> 监听器发布结果 -> 自动清理身份与上下文
+```
+
+配套数据文件在 `src/test/resources/io/testkit/basetest/demo/`：
+
+| 文件 | 作用 |
+|---|---|
+| `order.yaml` | 用例套件：2 个启用用例 + 1 个 `enabled: false` 演示过滤 |
+| `order-coupon-request.json5` | 请求载荷（JSON5 支持注释和尾逗号） |
+| `order-coupon-response.json5` | 期望响应，`orderId` 为动态字段 |
+| `order-fullprice-*.json5` | 第二条用例的请求与期望 |
+
+建议阅读顺序：先跑通 `mvn test`，再按 [学习实践路线](LEARNING-GUIDE.md) 逐层深入。
+
+### 目录结构
+
+```
+src/main/java/io/testkit/basetest/
+├── BaseTest.java              # 测试基类：用例上下文绑定与清理
+├── ReturnValueContext.java    # 线程隔离的跨步骤返回值存储
+├── assertion/                 # JsonDiff 严格/宽松 JSON 比较
+├── config/                    # YAML/JSON/JSON5 加载、环境配置合并
+├── data/                      # 数据驱动：YAML 套件 -> 强类型方法参数
+├── identity/                  # 线程隔离身份上下文 + 本地账号池
+├── mock/                      # Mock 场景/规则/生命周期模型
+├── runtime/                   # 运行时组合、TestNG 监听器、结果发布
+├── coverage/  discovery/  job/  model/   # SPI 契约与通用模型
+src/test/
+├── java/.../demo/QuickStartDemoTest.java   # 开箱即用演示（从这里开始）
+└── resources/.../demo/                     # 演示用 YAML 与 JSON5 数据
+```
+
+### 引入到自己的项目
+
+```bash
+mvn install   # 安装到本地仓库
+```
+
+```xml
+<dependency>
+    <groupId>io.testkit</groupId>
+    <artifactId>base-test-toolkit</artifactId>
+    <version>1.0.0</version>
+    <scope>test</scope>
+</dependency>
+```
+
 ## 已实现能力
 
 - YAML、JSON、JSON5 配置与测试数据加载。
@@ -39,6 +106,12 @@
 
 ```bash
 ./build.sh
+```
+
+或在 Windows CMD 中：
+
+```bat
+build.bat
 ```
 
 或：
