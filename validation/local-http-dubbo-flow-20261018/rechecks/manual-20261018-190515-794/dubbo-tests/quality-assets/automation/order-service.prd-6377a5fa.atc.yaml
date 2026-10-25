@@ -1,0 +1,13 @@
+# 黄金集 order-create-v1；无页面执行器证据，保留待确认
+suite: golden-order-create-v1
+status: pending-page-evidence
+TestCases:
+  - caseId: GOLD-001
+    steps: []
+    blockers: [需要真实订单页面和定位器证据]
+  - caseId: GOLD-002
+    steps: []
+    blockers: [需要真实订单页面和定位器证据]
+  - caseId: GOLD-003
+    steps: []
+    blockers: [需要真实订单页面和定位器证据]

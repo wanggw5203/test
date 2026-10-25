@@ -1,0 +1,8 @@
+{
+  "dubboDirectUrl" : "dubbo://[::1]:20891",
+  "interface" : "demo.golden.OrderService",
+  "httpBaseUrl" : "http://127.0.0.1:18081/",
+  "method" : "create",
+  "parameterTypes" : [ "java.util.Map" ],
+  "pid" : 32456
+}

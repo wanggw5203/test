@@ -1,0 +1,6 @@
+testDataSuite:
+  cases:
+    - name: initialization-only-no-business-call
+      thought: Verify project bootstrap and framework data loading only
+      request: [smoke-request.json]
+      expect: [smoke-expect.json]

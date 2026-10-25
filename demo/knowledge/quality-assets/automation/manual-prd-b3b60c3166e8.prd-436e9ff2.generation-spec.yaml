@@ -1,0 +1,70 @@
+# GOLDEN DEMO order-create-v1：合成演练契约，未执行真实测试
+apiCode: golden_order_http_framework_v2
+cases:
+- expect:
+    base:
+      body:
+        code: OK
+        orderId: ORDER-DEMO-001
+      status: 201
+  expectRef: gold-001.json5
+  name: 正常创建订单
+  request:
+    base:
+      quantity: 1
+      sku: SKU-DEMO
+  requestRef: gold-001.json5
+  sourceCaseId: GOLD-001
+  thought: 黄金集 order-create-v1，追溯 GOLD-001
+- expect:
+    base:
+      body:
+        code: INVALID_QUANTITY
+      status: 400
+  expectRef: gold-002.json5
+  name: 数量为零
+  request:
+    base:
+      quantity: 0
+      sku: SKU-DEMO
+  requestRef: gold-002.json5
+  sourceCaseId: GOLD-002
+  thought: 黄金集 order-create-v1，追溯 GOLD-002
+- expect:
+    base:
+      body:
+        code: SKU_REQUIRED
+      status: 400
+  expectRef: gold-003.json5
+  name: 缺少商品编码
+  request:
+    base:
+      quantity: 1
+  requestRef: gold-003.json5
+  sourceCaseId: GOLD-003
+  thought: 黄金集 order-create-v1，追溯 GOLD-003
+className: GoldenOrderHttpTest
+dataKey: golden_order_http_framework_v2
+description: 黄金集演练：创建订单；未执行真实测试
+endpoint:
+  authenticated: false
+  method: POST
+  path: /demo/orders
+environments:
+- test
+evidence: []
+generator:
+  profile: basetest-http
+packageName: demo.golden.framework.http
+schemaVersion: 2
+selector:
+  kind: HTTP_PATH
+  value: POST /demo/orders
+sourceCaseIds:
+- GOLD-001
+- GOLD-002
+- GOLD-003
+target:
+  protocol: HTTP
+types:
+  assets: []

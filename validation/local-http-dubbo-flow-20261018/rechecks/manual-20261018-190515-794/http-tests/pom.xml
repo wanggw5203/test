@@ -1,0 +1,13 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.testkit.validation</groupId><artifactId>local-order-http</artifactId><version>1.0-SNAPSHOT</version>
+  <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><testkit.version>1.1.0-SNAPSHOT</testkit.version></properties>
+  <dependencies>
+    <dependency><groupId>io.testkit</groupId><artifactId>base-test-toolkit</artifactId><version>${testkit.version}</version></dependency>
+
+  </dependencies>
+  <build><plugins>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version><configuration><parameters>true</parameters><proc>none</proc></configuration></plugin>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version></plugin>
+  </plugins></build>
+</project>

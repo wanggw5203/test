@@ -1,0 +1,28 @@
+common:
+  http:
+    timeout.ms: 10000
+  sdk:
+    timeout.ms: 5000
+    concurrency: 4
+    queue.capacity: 100
+  dubbo:
+    timeout.ms: 3000
+  xxljob:
+    dialect: 2.4.1
+    log.timeout.ms: 10000
+environments:
+  local:
+    http.base.url: http://127.0.0.1:8080
+    dubbo.url: dubbo://127.0.0.1:20880
+    kafka.bootstrap.servers: localhost:9092
+    xxljob.admin.url: http://127.0.0.1:8088/xxl-job-admin/
+  dev:
+    http.base.url: ${DEV_HTTP_URL}
+    dubbo.url: ${DEV_DUBBO_URL}
+    kafka.bootstrap.servers: ${DEV_KAFKA_BOOTSTRAP}
+    xxljob.admin.url: ${DEV_XXLJOB_URL}
+  qa:
+    http.base.url: ${QA_HTTP_URL}
+    dubbo.url: ${QA_DUBBO_URL}
+    kafka.bootstrap.servers: ${QA_KAFKA_BOOTSTRAP}
+    xxljob.admin.url: ${QA_XXLJOB_URL}

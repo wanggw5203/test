@@ -1,0 +1,6 @@
+{
+  "sha256": "7432451e32adfe6813404dd42c81c54c27cbb4fd104aacbcbd0ed6cd58da3385",
+  "discovery": "explicit source evidence, not an automatic PSI discovery claim",
+  "interface": "demo.golden.OrderService#create(java.util.Map)",
+  "source": "../../../service/src/main/java/demo/golden/OrderService.java"
+}

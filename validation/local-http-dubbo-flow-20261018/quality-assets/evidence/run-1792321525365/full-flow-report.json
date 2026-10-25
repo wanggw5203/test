@@ -1,0 +1,78 @@
+{
+  "scope": "Standalone provider, real HTTP and Dubbo TCP, separate JVMs; AI outputs remain GoldenDemo fixtures",
+  "provider": {
+    "dubboDirectUrl": "dubbo://[::1]:20891",
+    "pid": 16652,
+    "parameterTypes": [
+      "java.util.Map"
+    ],
+    "method": "create",
+    "httpBaseUrl": "http://127.0.0.1:18081/",
+    "interface": "demo.golden.OrderService"
+  },
+  "startedAt": "2026-10-18T11:05:25.365914300Z",
+  "projects": [
+    "rechecks/manual-20261018-190515-794/http-tests",
+    "rechecks/manual-20261018-190515-794/dubbo-tests"
+  ],
+  "addressConfiguration": "environment files; no address -D arguments",
+  "results": [
+    {
+      "exitCode": 0,
+      "failed": 0,
+      "evidence": "quality-assets/evidence/run-1792321525365/baseline-results.jsonl",
+      "passed": 4,
+      "phase": "baseline",
+      "protocol": "HTTP"
+    },
+    {
+      "exitCode": 0,
+      "failed": 0,
+      "evidence": "quality-assets/evidence/run-1792321525365/baseline-results.jsonl",
+      "passed": 4,
+      "phase": "baseline",
+      "protocol": "DUBBO"
+    },
+    {
+      "exitCode": 1,
+      "failed": 1,
+      "evidence": "quality-assets/evidence/run-1792321525365/fault-injection-results.jsonl",
+      "passed": 3,
+      "phase": "fault-injection",
+      "protocol": "HTTP"
+    },
+    {
+      "exitCode": 1,
+      "failed": 1,
+      "evidence": "quality-assets/evidence/run-1792321525365/fault-injection-results.jsonl",
+      "passed": 3,
+      "phase": "fault-injection",
+      "protocol": "DUBBO"
+    },
+    {
+      "exitCode": 0,
+      "failed": 0,
+      "evidence": "quality-assets/evidence/run-1792321525365/recovered-results.jsonl",
+      "passed": 4,
+      "phase": "recovered",
+      "protocol": "HTTP"
+    },
+    {
+      "exitCode": 0,
+      "failed": 0,
+      "evidence": "quality-assets/evidence/run-1792321525365/recovered-results.jsonl",
+      "passed": 4,
+      "phase": "recovered",
+      "protocol": "DUBBO"
+    }
+  ],
+  "overallStatus": "BOTH_PROTOCOLS_EXECUTED_FAULT_DETECTED_AND_RECOVERED; GOLDEN_AI_FEEDBACK_GAP_REMAINS",
+  "limitations": [
+    "No real model semantic analysis",
+    "Default GoldenDemo feedback remains not-run even with actual logs",
+    "No IDE GUI/VFS click-through validation",
+    "Local designed service, not company backend",
+    "No registry or database integration"
+  ],
+  "finishedAt": "2026-10-18T11:05:56.981157100Z"
+}

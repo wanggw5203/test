@@ -1,0 +1,7 @@
+**/target/
+**/.m2/
+dist/
+*.log
+settings-private.xml
+.env
+.env.*

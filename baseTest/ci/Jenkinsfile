@@ -1,0 +1,52 @@
+// Template only: configure the node, tools and repository branch protections first.
+// In this workspace the SCM root contains baseTest/. Use '.' for a standalone repository.
+pipeline {
+    agent { label 'testkit-jdk17' }
+    tools {
+        jdk 'jdk17'
+        maven 'maven39'
+    }
+    options {
+        disableConcurrentBuilds()
+        timeout(time: 30, unit: 'MINUTES')
+        buildDiscarder(logRotator(numToKeepStr: '30', artifactNumToKeepStr: '14'))
+        skipDefaultCheckout(true)
+    }
+    parameters {
+        choice(name: 'FRAMEWORK_DIR', choices: ['baseTest', '.'],
+               description: 'Framework directory below the SCM checkout root.')
+    }
+    environment {
+        TEST_ENV = 'local'
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Verify lifecycle') {
+            steps {
+                dir(params.FRAMEWORK_DIR) {
+                    pwsh '''
+                        $ErrorActionPreference = 'Stop'
+                        $ciMavenRepository = Join-Path $env:WORKSPACE '.m2/repository'
+                        ./verify-lifecycle.ps1 -MavenRepository $ciMavenRepository
+                    '''
+                }
+            }
+        }
+    }
+    post {
+        always {
+            dir(params.FRAMEWORK_DIR) {
+                // Empty reports are allowed here only to preserve compilation-failure diagnostics.
+                // The Report gate rejects missing/zero-execution reports on successful builds.
+                junit testResults: '**/target/surefire-reports/TEST-*.xml',
+                      allowEmptyResults: true
+                archiveArtifacts artifacts: 'target/verification-summary.json,target/verification-evidence.json,target/testkit-sbom.*,**/target/surefire-reports/**,**/target/failsafe-reports/**,**/target/*.jsonl,**/target/reports/**/*.jsonl,**/target/enterprise-plans/*.plan.json,**/target/*.jar',
+                                 allowEmptyArchive: true, fingerprint: true
+            }
+        }
+    }
+}

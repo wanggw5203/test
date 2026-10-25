@@ -1,0 +1,6 @@
+{
+  "code": 0,
+  // orderId is dynamic and ignored by the assertion.
+  "orderId": "ORD-dynamic",
+  "totalPrice": 180,
+}

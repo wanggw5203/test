@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "runId": "20261017-135054-1a849f77",
+  "assetId": "manual-prd-b3b60c3166e8.prd-436e9ff2",
+  "workspaceId": "quality-knowledge-base",
+  "team": "quality-engineering",
+  "pluginVersion": "1.3.1",
+  "mode": "GOLDEN_DEMO",
+  "goldenDataset": "order-create-v1",
+  "model": "fixture:order-create-v1",
+  "automationContract": {
+    "feedback": "feedback.yaml",
+    "generationSpec": "generation-spec.yaml",
+    "handoffMode": "GIT_ASSET",
+    "executeFromPlugin": false,
+    "framework": "TestNG",
+    "scaffoldGenerator": "BUNDLED",
+    "interfaceDiscovery": "InterfaceDiscoveryProvider",
+    "protectModifiedScaffolds": true
+  },
+  "startedAt": "2026-10-17T13:50:54.021726100Z",
+  "source": {
+    "sha256": "b3b60c3166e8439a9f80759ff3fc17386c0904c5cfb3d86d738cec75b2b85e51",
+    "path": "quality-assets/inputs/manual/manual-prd-b3b60c3166e8.prd.txt"
+  },
+  "inputs": [
+    "quality-assets/inputs/manual/manual-prd-b3b60c3166e8.prd.txt"
+  ],
+  "evidencePath": "quality-assets/evidence/manual-prd-b3b60c3166e8.prd-436e9ff2-5b05f7e7757f.evidence.md",
+  "stages": [
+    {
+      "stage": "GENERATE_API_SCAFFOLD",
+      "status": "PASSED",
+      "protocol": "HTTP",
+      "selector": {
+        "kind": "HTTP_PATH",
+        "value": "POST /demo/orders"
+      },
+      "apiCode": "golden_order_http_v1",
+      "manifestPath": ".api-test-generator/golden_order_http_v1/scaffold-manifest.yaml",
+      "executableizationPlanPath": ".api-test-generator/golden_order_http_v1/executableization-plan.yaml",
+      "generatedFiles": [
+        "src/test/java/demo/golden/http/GoldenOrderHttpTest.java",
+        "src/test/resources/demo/golden/http/golden_order_http_v1.yaml",
+        "src/test/resources/demo/golden/http/gold-001_req_test.json5",
+        "src/test/resources/demo/golden/http/gold-001_exp_test.json5",
+        "src/test/resources/demo/golden/http/gold-002_req_test.json5",
+        "src/test/resources/demo/golden/http/gold-002_exp_test.json5",
+        "src/test/resources/demo/golden/http/gold-003_req_test.json5",
+        "src/test/resources/demo/golden/http/gold-003_exp_test.json5",
+        ".api-test-generator/golden_order_http_v1/executableization-plan.yaml",
+        ".api-test-generator/golden_order_http_v1/scaffold-manifest.yaml"
+      ],
+      "completedAt": "2026-10-17T13:50:54.054726300Z"
+    },
+    {
+      "status": "FAILED",
+      "completedAt": "2026-10-17T13:50:54.151233800Z",
+      "message": "Access is allowed from Event Dispatch Thread (EDT) only; see https://jb.gg/ij-platform-threading for details\nCurrent thread: Thread[#110,ApplicationImpl pooled thread 5,4,main] 422024949 (EventQueue.isDispatchThread()\u003dfalse)\nSystemEventQueueThread: Thread[#41,AWT-EventQueue-0,10,main] 2104332631",
+      "stage": "TEST_CASES_TO_API_SPEC"
+    }
+  ],
+  "status": "FAILED",
+  "completedAt": "2026-10-17T13:50:54.071726900Z",
+  "durationMillis": 50
+}

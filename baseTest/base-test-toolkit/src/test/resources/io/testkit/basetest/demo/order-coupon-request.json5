@@ -1,0 +1,6 @@
+{
+  // JSON5 payloads support comments and trailing commas.
+  "productId": "P-100",
+  "quantity": 2,
+  "couponCode": "SAVE20",
+}

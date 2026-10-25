@@ -1,0 +1,14 @@
+# 黄金集 order-create-v1；生成完成不代表测试通过
+feedback:
+  fixtureId: order-create-v1
+  status: blocked
+  classification: UNKNOWN
+  sourceCaseIds: [GOLD-001, GOLD-002, GOLD-003]
+  execution:
+    status: not-run
+    evidence: []
+  remainingBlockers:
+    - 未执行真实 HTTP 或 Dubbo 接口
+    - 未编译或运行目标 TestNG 测试
+    - 未连接真实页面执行器
+  nextAction: 将生成资产提交评审，并由框架执行后导入真实日志

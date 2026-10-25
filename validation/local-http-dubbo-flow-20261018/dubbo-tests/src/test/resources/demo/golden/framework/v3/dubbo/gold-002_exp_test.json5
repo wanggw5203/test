@@ -1,0 +1,4 @@
+// 数量为零 - test expected response
+{
+  "code": "INVALID_QUANTITY"
+}

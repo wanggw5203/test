@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Generated API tests"><test name="Framework cases"><classes><class name="demo.golden.framework.http.GoldenOrderHttpTest"/></classes></test></suite>

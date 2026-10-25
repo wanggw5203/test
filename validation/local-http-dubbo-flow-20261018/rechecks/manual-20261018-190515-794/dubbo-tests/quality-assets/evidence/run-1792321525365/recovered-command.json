@@ -1,0 +1,13 @@
+{
+  "command": [
+    "cmd.exe",
+    "/d",
+    "/c",
+    "mvn",
+    "-B",
+    "-ntp",
+    "test",
+    "-Dtestkit.report.file\u003dquality-assets/evidence/run-1792321525365/recovered-results.jsonl"
+  ],
+  "exitCode": 0
+}

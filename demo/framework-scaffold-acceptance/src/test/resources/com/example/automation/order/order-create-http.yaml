@@ -1,0 +1,14 @@
+testDataSuite:
+  description: 创建订单 HTTP 接口
+  cases:
+    - sourceCaseId: TC-ORDER-HTTP-001
+      name: TC-ORDER-HTTP-001 / test / 有效参数创建订单成功
+      extraParams:
+        environment: test
+        sourceCaseId: TC-ORDER-HTTP-001
+      thought: 验证合法 SKU 和数量能够创建订单
+      mockId: null
+      request:
+        - 01_create_order_success_req_test.json5
+      expect:
+        - 01_create_order_success_exp_test.json5

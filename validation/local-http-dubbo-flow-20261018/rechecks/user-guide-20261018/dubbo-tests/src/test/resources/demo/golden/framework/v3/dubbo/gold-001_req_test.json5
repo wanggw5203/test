@@ -1,0 +1,5 @@
+// 正常创建订单 - test request
+{
+  "quantity": 1,
+  "sku": "SKU-DEMO"
+}

@@ -1,0 +1,16 @@
+{
+  "exitCode": 1,
+  "command": [
+    "cmd.exe",
+    "/d",
+    "/c",
+    "mvn",
+    "-B",
+    "-ntp",
+    "test",
+    "-Dapi.baseUrl\u003dhttp://127.0.0.1:18081/",
+    "-Ddubbo.directUrl\u003ddubbo://[::1]:20891",
+    "-Ddubbo.registry\u003dN/A",
+    "-Dtestkit.report.file\u003dquality-assets/evidence/run-1792289867182/fault-injection-results.jsonl"
+  ]
+}

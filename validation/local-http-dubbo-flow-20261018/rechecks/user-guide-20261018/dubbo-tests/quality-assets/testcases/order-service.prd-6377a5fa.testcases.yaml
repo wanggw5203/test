@@ -1,0 +1,26 @@
+# 黄金集 order-create-v1；固定合成用例
+TestCases:
+  - caseId: GOLD-001
+    title: 正常创建订单
+    priority: P0
+    sourceRuleIds: [BR-001]
+    tags: [接口, 黄金集]
+    steps:
+      - action: 提交 sku=SKU-DEMO、quantity=1
+        expected: HTTP 201；code=OK、orderId=ORDER-DEMO-001
+  - caseId: GOLD-002
+    title: 数量为零
+    priority: P1
+    sourceRuleIds: [BR-002]
+    tags: [接口, 黄金集, 反向]
+    steps:
+      - action: 提交 sku=SKU-DEMO、quantity=0
+        expected: HTTP 400；code=INVALID_QUANTITY
+  - caseId: GOLD-003
+    title: 缺少商品编码
+    priority: P1
+    sourceRuleIds: [BR-003]
+    tags: [接口, 黄金集, 反向]
+    steps:
+      - action: 提交 quantity=1，不传 sku
+        expected: HTTP 400；code=SKU_REQUIRED

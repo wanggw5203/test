@@ -1,0 +1,2 @@
+{// Two books, SAVE20 subtracts 20 from the total (prices are cents).
+ "productId": "BOOK", "quantity": 2, "couponCode": "SAVE20"}

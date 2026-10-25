@@ -1,0 +1,22 @@
+<idea-plugin>
+    <id>io.github.aitestflow</id>
+    <name>AI Test Flow</name>
+    <vendor>AI Test Flow</vendor>
+
+    <description><![CDATA[
+      Git-first 企业测试能力层：输入、证据、TAD、测试用例、HTTP/Dubbo 自动化规格、TestNG 脚手架、反馈和 Manifest 全部由项目版本管理；插件只负责读取、生成、校验和写回。
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="AI Test Flow"
+                    anchor="right"
+                    icon="/icons/aiTestFlow.svg"
+                    factoryClass="io.github.aitestflow.ui.AiTestFlowToolWindowFactory"/>
+        <projectService serviceImplementation="io.github.aitestflow.settings.AiTestFlowSettings"/>
+        <projectConfigurable id="io.github.aitestflow.settings"
+                             displayName="AI Test Flow"
+                             instance="io.github.aitestflow.settings.AiTestFlowConfigurable"/>
+    </extensions>
+</idea-plugin>

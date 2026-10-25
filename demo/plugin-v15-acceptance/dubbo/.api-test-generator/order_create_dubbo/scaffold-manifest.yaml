@@ -1,0 +1,66 @@
+schemaVersion: 2
+generatorVersion: 2.1.0
+apiCode: order_create_dubbo
+sourceCaseIds:
+  - TC-ORDER-DUBBO-001
+profile: basetest-dubbo
+protocol: DUBBO
+targetModule: order-service
+selector:
+  kind: JAVA_SYMBOL
+  value: com.example.order.OrderService#create
+types:
+  request:
+    kind: BO
+    fqcn: com.example.order.CreateOrderBO
+    sourceFile: null
+    sha256: null
+    fields: [
+      ]
+  response:
+    kind: VO
+    fqcn: com.example.order.OrderVO
+    sourceFile: null
+    sha256: null
+    fields: [
+      ]
+  assets: [
+    ]
+evidence:
+  - order: 1
+    kind: DUBBO_INTERFACE
+    symbol: com.example.order.OrderService#create
+    file: order-api/src/main/java/com/example/order/OrderService.java
+    line: null
+    sha256: null
+template: query
+generatedAt: '2026-10-18T01:29:14.293699900Z'
+sourceSpec: E:\AITest\test\tools\api-test-scaffold-generator\src\main\resources\example-dubbo-v2-spec.yaml
+sourceSpecSha256: 41c71ef02dda0b7f38b6ec4bf36b685edf3cca5bfaa3a3ce08736f09edd4f286
+sourceSpecSemanticSha256: 458e15a67448fbf1c51579e5d3b58f9de0565ca7bf58fecdf8f8cd3834cb3db8
+testClass: src/test/java/com/example/automation/order/OrderCreateDubboGeneratedTests.java
+suiteFile: src/test/resources/com/example/automation/order/order-create-dubbo.yaml
+executableizationPlan: .api-test-generator/order_create_dubbo/executableization-plan.yaml
+files:
+  - path: src/test/java/com/example/automation/order/OrderCreateDubboGeneratedTests.java
+    sha256: 655925ec1160c2a2c3ab981a8471af787d949e03ae5d97a9c153d278a6faf74a
+  - path: src/test/resources/com/example/automation/order/order-create-dubbo.yaml
+    sha256: 31df8f93240a36ca3e43cc8c5e8914088011f5bd0ed5923e3dd47c1ad9c83e14
+  - path: src/main/java/com/example/automation/order/OrderCreateDubboGeneratedTestsApi.java
+    sha256: 8c90bdef1364105a949b1c5d836ad54206dfb1c6bf554451b038753936bde00b
+  - path: src/main/java/com/example/automation/order/OrderCreateDubboGeneratedTestsDataBuilder.java
+    sha256: 529471f3c4b40e008fd3b7a89d2c6a0425f7a159751043af7c2e2d3a253b5d82
+  - path: .api-test-generator/order_create_dubbo/testng.xml
+    sha256: 8f6ec20eb7e16b31fe38893052c12887e19ce3ad48d9b1f73443d2e83313e1b8
+  - path: .api-test-generator/order_create_dubbo/FRAMEWORK-README.md
+    sha256: 36c9a6e4158484b71f87eecc14a674c258a1d09e0c2a9af39264d6ea8a63242e
+  - path: src/test/resources/com/example/automation/order/01_create_order_success_req_test.json5
+    sha256: 75e89a66e7d05c340c6e060e99d36017efb3b59b7cb7041aa9e85c22bb977659
+  - path: src/test/resources/com/example/automation/order/01_create_order_success_exp_test.json5
+    sha256: adeb2918bc8aecd6865066382f32040159013bb678b5576a99b54820357fbc38
+  - path: .api-test-generator/order_create_dubbo/executableization-plan.yaml
+    sha256: e234bc9b88f3bb6d0a99148162bb428109d3013274c8b90c6ddf25b92cc9b12b
+handoff:
+  status: pending-executableization
+  skill: make-api-tests-executable
+  next: process field hints, wire runtime data, compile and run the target test

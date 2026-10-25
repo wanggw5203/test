@@ -1,0 +1,19 @@
+# EXAMPLE ONLY. Replace these placeholders with real accounts/groups supported by your Git forge.
+# Patterns below assume the framework is a standalone repository root.
+# For the current parent repository prepend /baseTest to every path pattern.
+# Put the reviewed result in the location required by your Git forge; this file itself enforces nothing.
+
+*                               @example-org/framework-maintainers
+/pom.xml                        @example-org/framework-maintainers @example-org/ci-maintainers
+/testkit-parent/                @example-org/framework-maintainers @example-org/ci-maintainers
+/testkit-bom/                   @example-org/framework-maintainers
+/base-test-toolkit/             @example-org/framework-maintainers
+/enterprise-adapters/           @example-org/framework-maintainers @example-org/middleware-maintainers
+/enterprise-team-example/       @example-org/framework-maintainers @example-org/qa-domain-leads
+/java-api-lab/                  @example-org/qa-domain-leads
+/config/                        @example-org/environment-maintainers
+/ci/                            @example-org/ci-maintainers @example-org/security-maintainers
+/verify-framework.ps1           @example-org/ci-maintainers @example-org/framework-maintainers
+/ENTERPRISE-TEAM-MODE.md         @example-org/framework-maintainers @example-org/qa-domain-leads
+/CONTRIBUTING.md                 @example-org/framework-maintainers
+/CHANGELOG.md                    @example-org/framework-maintainers

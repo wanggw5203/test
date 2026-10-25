@@ -1,0 +1,36 @@
+testDataSuite:
+  description: 黄金集演练：创建订单；未执行真实测试
+  cases:
+    - sourceCaseId: GOLD-001
+      name: GOLD-001 / test / 正常创建订单
+      extraParams:
+        sourceCaseId: GOLD-001
+        environment: test
+      thought: 黄金集 order-create-v1，追溯 GOLD-001
+      mockId: null
+      request:
+        - gold-001_req_test.json5
+      expect:
+        - gold-001_exp_test.json5
+    - sourceCaseId: GOLD-002
+      name: GOLD-002 / test / 数量为零
+      extraParams:
+        sourceCaseId: GOLD-002
+        environment: test
+      thought: 黄金集 order-create-v1，追溯 GOLD-002
+      mockId: null
+      request:
+        - gold-002_req_test.json5
+      expect:
+        - gold-002_exp_test.json5
+    - sourceCaseId: GOLD-003
+      name: GOLD-003 / test / 缺少商品编码
+      extraParams:
+        sourceCaseId: GOLD-003
+        environment: test
+      thought: 黄金集 order-create-v1，追溯 GOLD-003
+      mockId: null
+      request:
+        - gold-003_req_test.json5
+      expect:
+        - gold-003_exp_test.json5

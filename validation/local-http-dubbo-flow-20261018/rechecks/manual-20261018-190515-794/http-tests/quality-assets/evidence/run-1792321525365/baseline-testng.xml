@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="TestSuite" time="0.918" tests="4" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="21"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.class.path" value="E:\AITest\test\validation\local-http-dubbo-flow-20261018\rechecks\manual-20261018-190515-794\http-tests\target\test-classes;E:\AITest\test\validation\local-http-dubbo-flow-20261018\rechecks\manual-20261018-190515-794\http-tests\target\classes;C:\Users\Administrator\.m2\repository\io\testkit\base-test-toolkit\1.1.0-SNAPSHOT\base-test-toolkit-1.1.0-SNAPSHOT.jar;C:\Users\Administrator\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.18.11\jackson-datatype-jsr310-2.18.11.jar;C:\Users\Administrator\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.18.11\jackson-annotations-2.18.11.jar;C:\Users\Administrator\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.18.11\jackson-core-2.18.11.jar;C:\Users\Administrator\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.18.11\jackson-databind-2.18.11.jar;C:\Users\Administrator\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-yaml\2.18.11\jackson-dataformat-yaml-2.18.11.jar;C:\Users\Administrator\.m2\repository\org\yaml\snakeyaml\2.3\snakeyaml-2.3.jar;C:\Users\Administrator\.m2\repository\org\testng\testng\7.10.2\testng-7.10.2.jar;C:\Users\Administrator\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;C:\Users\Administrator\.m2\repository\com\beust\jcommander\1.82\jcommander-1.82.jar;C:\Users\Administrator\.m2\repository\org\webjars\jquery\3.7.1\jquery-3.7.1.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="21"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.boot.library.path" value="D:\wgw\jdk\bin"/>
+    <property name="sun.java.command" value="C:\Users\Administrator\AppData\Local\Temp\surefire14142724616823152362\surefirebooter-20261018190528615_3.jar C:\Users\Administrator\AppData\Local\Temp\surefire14142724616823152362 2026-10-18T19-05-28_520-jvmRun1 surefire-20261018190528615_1tmp surefire_0-20261018190528615_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="E:\AITest\test\validation\local-http-dubbo-flow-20261018\rechecks\manual-20261018-190515-794\http-tests\target\test-classes;E:\AITest\test\validation\local-http-dubbo-flow-20261018\rechecks\manual-20261018-190515-794\http-tests\target\classes;C:\Users\Administrator\.m2\repository\io\testkit\base-test-toolkit\1.1.0-SNAPSHOT\base-test-toolkit-1.1.0-SNAPSHOT.jar;C:\Users\Administrator\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.18.11\jackson-datatype-jsr310-2.18.11.jar;C:\Users\Administrator\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.18.11\jackson-annotations-2.18.11.jar;C:\Users\Administrator\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.18.11\jackson-core-2.18.11.jar;C:\Users\Administrator\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.18.11\jackson-databind-2.18.11.jar;C:\Users\Administrator\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-yaml\2.18.11\jackson-dataformat-yaml-2.18.11.jar;C:\Users\Administrator\.m2\repository\org\yaml\snakeyaml\2.3\snakeyaml-2.3.jar;C:\Users\Administrator\.m2\repository\org\testng\testng\7.10.2\testng-7.10.2.jar;C:\Users\Administrator\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;C:\Users\Administrator\.m2\repository\com\beust\jcommander\1.82\jcommander-1.82.jar;C:\Users\Administrator\.m2\repository\org\webjars\jquery\3.7.1\jquery-3.7.1.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\Administrator"/>
+    <property name="user.language" value="zh"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2026-01-20"/>
+    <property name="java.home" value="D:\wgw\jdk"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="E:\AITest\test\validation\local-http-dubbo-flow-20261018\rechecks\manual-20261018-190515-794\http-tests"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="testkit.report.file" value="quality-assets/evidence/run-1792321525365/baseline-results.jsonl"/>
+    <property name="surefire.real.class.path" value="C:\Users\Administrator\AppData\Local\Temp\surefire14142724616823152362\surefirebooter-20261018190528615_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="21.0.10+8-LTS-217"/>
+    <property name="user.name" value="Administrator"/>
+    <property name="stdout.encoding" value="GBK"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\Administrator\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\ADMINI~1\AppData\Local\Temp\"/>
+    <property name="java.version" value="21.0.10"/>
+    <property name="user.dir" value="E:\AITest\test\validation\local-http-dubbo-flow-20261018\rechecks\manual-20261018-190515-794\http-tests"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="GBK"/>
+    <property name="java.library.path" value="D:\wgw\jdk\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell;C:\Users\Administrator\.codex\tmp\arg0\codex-arg0T4DXbP;C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\libheif\libheif\bin;C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\jxrlib\jxrlib\bin;C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\poppler\Library\bin;C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\bin\override;C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Users\Administrator\AppData\Local\Programs\Python\Python314;C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Scripts;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\GitHub CLI\;D:\wgw\aiProject\nodejs\node-v20.11.1-win-x64;c:\Users\Administrator\.trae-cn\tools\trae-gopls\current;c:\Users\Administrator\.trae-cn\sdks\workspaces\e544812e\versions\node\current;c:\Users\Administrator\.trae-cn\sdks\versions\node\current;C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\Administrator\AppData\Local\Programs\Python\Python314\;C:\Users\Administrator\AppData\Local\Programs\Python\Launcher\;C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Users\Administrator\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Administrator\AppData\Roaming\npm;C:\Users\Administrator\AppData\Local\Programs\Kiro\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2026.1.4\bin;C:\Tools\apache-maven-3.9.16\bin;D:\PyCharm\PyCharm 2026.2.2\bin;C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\bin\fallback;C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin;C:\Users\Administrator\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd;C:\Users\Administrator\AppData\Local\OpenAI\Codex\bin\abd8892d7682be29;C:\Users\Administrator\AppData\Local\OpenAI\Codex\bin\979a96ce184041d1;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="GBK"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="21.0.10+8-LTS-217"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="65.0"/>
+  </properties>
+  <testcase name="verifyApi[CaseContext[name=GOLD-001 / test / 正常创建订单, thought=黄金集 order-create-v1，追溯 GOLD-001, mockId=null, users=[], extraParams={environment=test, sourceCaseId=GOLD-001}], {quantity=1, sku=SKU-DEMO}, {body={code=OK, orderId=ORDER-DEMO-001}, status=201}](1)" classname="demo.golden.framework.v3.http.GoldenOrderHttpTest" time="0.111">
+    <system-out><![CDATA[[TESTKIT CALL] {"type":"protocol-call","callId":"b9402740-f63a-4af6-bb7d-af6620bce7de","protocol":"HTTP","target":"http://127.0.0.1:18081/demo/orders","thread":"main","environment":"local","runId":"4f069c66-1eda-4ab9-b73f-bffdb89df4f8","caseId":"18925c85-ef38-42a9-bd28-2efe0dce4b21","caseName":"GOLD-001 / test / 正常创建订单","time":"2026-10-18T11:05:29.696464500Z","phase":"REQUEST","request":{"method":"POST","headers":{},"body":{"quantity":1,"sku":"SKU-DEMO"}}}
+[TESTKIT CALL] {"type":"protocol-call","callId":"b9402740-f63a-4af6-bb7d-af6620bce7de","protocol":"HTTP","target":"http://127.0.0.1:18081/demo/orders","thread":"main","environment":"local","runId":"4f069c66-1eda-4ab9-b73f-bffdb89df4f8","caseId":"18925c85-ef38-42a9-bd28-2efe0dce4b21","caseName":"GOLD-001 / test / 正常创建订单","time":"2026-10-18T11:05:29.766462600Z","phase":"RESPONSE","durationMillis":85,"response":{"status":201,"body":{"code":"OK","orderId":"ORDER-DEMO-001"},"headers":{"content-length":["40"],"content-type":["application/json; charset=utf-8"],"date":["Sun, 18 Oct 2026 11:05:29 GMT"]}}}
+]]></system-out>
+    <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+]]></system-err>
+  </testcase>
+  <testcase name="verifyApi[CaseContext[name=GOLD-002 / test / 数量为零, thought=黄金集 order-create-v1，追溯 GOLD-002, mockId=null, users=[], extraParams={environment=test, sourceCaseId=GOLD-002}], {quantity=0, sku=SKU-DEMO}, {body={code=INVALID_QUANTITY}, status=400}](2)" classname="demo.golden.framework.v3.http.GoldenOrderHttpTest" time="0.014">
+    <system-out><![CDATA[[TESTKIT CALL] {"type":"protocol-call","callId":"dcf35b76-f129-450a-880d-7c59988f485b","protocol":"HTTP","target":"http://127.0.0.1:18081/demo/orders","thread":"main","environment":"local","runId":"4f069c66-1eda-4ab9-b73f-bffdb89df4f8","caseId":"66f447f7-4644-421e-954c-f2cd046a4642","caseName":"GOLD-002 / test / 数量为零","time":"2026-10-18T11:05:29.781461800Z","phase":"REQUEST","request":{"method":"POST","headers":{},"body":{"quantity":0,"sku":"SKU-DEMO"}}}
+[TESTKIT CALL] {"type":"protocol-call","callId":"dcf35b76-f129-450a-880d-7c59988f485b","protocol":"HTTP","target":"http://127.0.0.1:18081/demo/orders","thread":"main","environment":"local","runId":"4f069c66-1eda-4ab9-b73f-bffdb89df4f8","caseId":"66f447f7-4644-421e-954c-f2cd046a4642","caseName":"GOLD-002 / test / 数量为零","time":"2026-10-18T11:05:29.788461100Z","phase":"RESPONSE","durationMillis":6,"response":{"status":400,"body":{"code":"INVALID_QUANTITY"},"headers":{"content-length":["27"],"content-type":["application/json; charset=utf-8"],"date":["Sun, 18 Oct 2026 11:05:29 GMT"]}}}
+]]></system-out>
+  </testcase>
+  <testcase name="verifyApi[CaseContext[name=GOLD-003 / test / 缺少商品编码, thought=黄金集 order-create-v1，追溯 GOLD-003, mockId=null, users=[], extraParams={environment=test, sourceCaseId=GOLD-003}], {quantity=1}, {body={code=SKU_REQUIRED}, status=400}](3)" classname="demo.golden.framework.v3.http.GoldenOrderHttpTest" time="0.01">
+    <system-out><![CDATA[[TESTKIT CALL] {"type":"protocol-call","callId":"f6fcea32-552e-458e-815e-36ae98d114cc","protocol":"HTTP","target":"http://127.0.0.1:18081/demo/orders","thread":"main","environment":"local","runId":"4f069c66-1eda-4ab9-b73f-bffdb89df4f8","caseId":"d8d35a8c-f052-4634-bc48-db2c8d860abc","caseName":"GOLD-003 / test / 缺少商品编码","time":"2026-10-18T11:05:29.796462400Z","phase":"REQUEST","request":{"method":"POST","headers":{},"body":{"quantity":1}}}
+[TESTKIT CALL] {"type":"protocol-call","callId":"f6fcea32-552e-458e-815e-36ae98d114cc","protocol":"HTTP","target":"http://127.0.0.1:18081/demo/orders","thread":"main","environment":"local","runId":"4f069c66-1eda-4ab9-b73f-bffdb89df4f8","caseId":"d8d35a8c-f052-4634-bc48-db2c8d860abc","caseName":"GOLD-003 / test / 缺少商品编码","time":"2026-10-18T11:05:29.801460900Z","phase":"RESPONSE","durationMillis":5,"response":{"status":400,"body":{"code":"SKU_REQUIRED"},"headers":{"content-length":["23"],"content-type":["application/json; charset=utf-8"],"date":["Sun, 18 Oct 2026 11:05:29 GMT"]}}}
+]]></system-out>
+  </testcase>
+  <testcase name="verifiesInitialization[CaseContext[name=initialization-only-no-business-call, thought=Verify project bootstrap and framework data loading only, mockId=null, users=[], extraParams={}], {message=framework-ready}, {message=framework-ready}](1)" classname="validation.order.http.smoke.InitializationSmokeTest" time="0.0"/>
+</testsuite>

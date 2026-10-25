@@ -1,0 +1,2 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="local-order-dubbo"><test name="Project tests"><packages><package name="validation.order.dubbo.*"/></packages></test></suite>

@@ -1,0 +1,14 @@
+{
+  "exitCode": 0,
+  "command": [
+    "cmd.exe",
+    "/d",
+    "/c",
+    "mvn",
+    "-B",
+    "-ntp",
+    "test",
+    "-Dapi.baseUrl\u003dhttp://127.0.0.1:51121/",
+    "-Dtestkit.report.file\u003dquality-assets/evidence/baseline-results.jsonl"
+  ]
+}

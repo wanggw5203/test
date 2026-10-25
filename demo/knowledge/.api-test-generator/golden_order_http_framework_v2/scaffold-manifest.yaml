@@ -1,0 +1,63 @@
+schemaVersion: 2
+generatorVersion: 2.0.0
+apiCode: golden_order_http_framework_v2
+sourceCaseIds:
+  - GOLD-001
+  - GOLD-002
+  - GOLD-003
+profile: basetest-http
+protocol: HTTP
+targetModule: null
+selector:
+  kind: HTTP_PATH
+  value: POST /demo/orders
+types:
+  request: {
+    }
+  response: {
+    }
+  assets: [
+    ]
+evidence: [
+  ]
+template: query
+generatedAt: '2026-10-17T16:20:18.775193200Z'
+sourceSpec: E:\AITest\test\demo\knowledge\quality-assets\automation\manual-prd-b3b60c3166e8.prd-436e9ff2.generation-spec.yaml
+sourceSpecSha256: 4a6bd073aef7b4cb417d815236f81602a373974442bba8796d7aea9ab3d14005
+sourceSpecSemanticSha256: b9ce68f9c2fde91590c7e5737516cca1167e652f5952030f8f50e79819c44bea
+testClass: src/test/java/demo/golden/framework/http/GoldenOrderHttpTest.java
+suiteFile: src/test/resources/demo/golden/framework/http/golden_order_http_framework_v2.yaml
+executableizationPlan: .api-test-generator/golden_order_http_framework_v2/executableization-plan.yaml
+files:
+  - path: src/test/java/demo/golden/framework/http/GoldenOrderHttpTest.java
+    sha256: 944027a02a839a2001481a3cf7656d6e827c113991501ee472f0d41898a28528
+  - path: src/test/resources/demo/golden/framework/http/golden_order_http_framework_v2.yaml
+    sha256: 94b12f08450a872ff7e7e1e166cf19e1b0700430eee278befe3f22bdd1e821d9
+  - path: src/test/java/demo/golden/framework/http/GoldenOrderHttpTestApi.java
+    sha256: 2a9b5c1f447fbdeab883487a79ce4f2ae37a8a5930c620646f919f6185743d48
+  - path: src/test/java/demo/golden/framework/http/GoldenOrderHttpTestDataBuilder.java
+    sha256: d4fe96533d8400b3fa77e5c1f36decef1e9b03a5a9627d8952287af3ebee0a7b
+  - path: .api-test-generator/golden_order_http_framework_v2/testng.xml
+    sha256: 9e5649285e919abd7c43d8fab19c081ffaa3ae1d7e796f485ce1981c175a2058
+  - path: .api-test-generator/golden_order_http_framework_v2/pom.xml
+    sha256: 8d2a680ee7462adf2662a893ba3cd626acd0cc76c139d92f7f5bfd03bf530078
+  - path: .api-test-generator/golden_order_http_framework_v2/FRAMEWORK-README.md
+    sha256: 3aa0a650df75abd10e2a7a02f3768c9ce06e38187e5c8cc488507a81f7e5b218
+  - path: src/test/resources/demo/golden/framework/http/gold-001_req_test.json5
+    sha256: b023c91b8475981ef22406b01c93045b99a42d1c9e638c1b26aefc2da44e5b8a
+  - path: src/test/resources/demo/golden/framework/http/gold-001_exp_test.json5
+    sha256: c4047ebdc188b65bb2fa0a63c38f482c272a6ab6711bb775bee846966577021e
+  - path: src/test/resources/demo/golden/framework/http/gold-002_req_test.json5
+    sha256: d05d668e6805a77b61d202800ad4fdfec1943f51113653b027320f5634ea998d
+  - path: src/test/resources/demo/golden/framework/http/gold-002_exp_test.json5
+    sha256: c203e6d075974ee46129e339046bc4059d14b0e8fc16c080279578c174759447
+  - path: src/test/resources/demo/golden/framework/http/gold-003_req_test.json5
+    sha256: 95763f9c199c6e9871c107fad39c5cf09ebf4d8ec97ba41dd20a642f2a2747d9
+  - path: src/test/resources/demo/golden/framework/http/gold-003_exp_test.json5
+    sha256: 588f56bb6860c51115510fd020fe85b04f4a0ca67bd5b0f0061fb6c5eb38ee1f
+  - path: .api-test-generator/golden_order_http_framework_v2/executableization-plan.yaml
+    sha256: 65a42e2a6e7ec72f7a44e759716c9031183cc44e1326db35e51abd1dd585a12a
+handoff:
+  status: pending-executableization
+  skill: make-api-tests-executable
+  next: process field hints, wire runtime data, compile and run the target test

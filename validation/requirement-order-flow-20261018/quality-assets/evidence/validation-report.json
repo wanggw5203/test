@@ -1,0 +1,118 @@
+{
+  "startedAt": "2026-10-18T01:43:52.177903200Z",
+  "projectRoot": "E:\\AITest\\test\\validation\\requirement-order-flow-20261018",
+  "generationMode": "GOLDEN_DEMO: order-create-v1; no remote AI model",
+  "writeMode": "filesystem test harness; IDEA UI/VFS not exercised",
+  "requirement": {
+    "path": "quality-assets\\inputs\\order-create.prd.md",
+    "sha256": "63116871bab8e5880bf0acd93348d49839c6fe03a5b177ff5743c220340d6a00"
+  },
+  "scaffold": {
+    "apiCode": "golden_order_http_framework_v3",
+    "manifestPath": ".api-test-generator/golden_order_http_framework_v3/scaffold-manifest.yaml",
+    "executableizationPlanPath": ".api-test-generator/golden_order_http_framework_v3/executableization-plan.yaml",
+    "generatedFiles": [
+      "src/test/java/demo/golden/framework/v3/http/GoldenOrderHttpTest.java",
+      "src/test/resources/demo/golden/framework/v3/http/golden_order_http_framework_v3.yaml",
+      "src/main/java/demo/golden/framework/v3/http/GoldenOrderHttpTestApi.java",
+      "src/main/java/demo/golden/framework/v3/http/GoldenOrderHttpTestDataBuilder.java",
+      ".api-test-generator/golden_order_http_framework_v3/testng.xml",
+      ".api-test-generator/golden_order_http_framework_v3/FRAMEWORK-README.md",
+      "src/test/resources/demo/golden/framework/v3/http/gold-001_req_test.json5",
+      "src/test/resources/demo/golden/framework/v3/http/gold-001_exp_test.json5",
+      "src/test/resources/demo/golden/framework/v3/http/gold-002_req_test.json5",
+      "src/test/resources/demo/golden/framework/v3/http/gold-002_exp_test.json5",
+      "src/test/resources/demo/golden/framework/v3/http/gold-003_req_test.json5",
+      "src/test/resources/demo/golden/framework/v3/http/gold-003_exp_test.json5",
+      ".api-test-generator/golden_order_http_framework_v3/executableization-plan.yaml",
+      ".api-test-generator/golden_order_http_framework_v3/scaffold-manifest.yaml"
+    ]
+  },
+  "execution": {
+    "passedScope": "three HTTP business scenarios plus initialization smoke",
+    "httpRequestCount": 9,
+    "faultInjectionExit": 1,
+    "recoveredExit": 0,
+    "fixture": "independent loopback synthetic service, not company backend",
+    "baselineExit": 0
+  },
+  "checks": [
+    {
+      "passed": true,
+      "check": "project-initialization",
+      "detail": "Independent initializer; framework compile dependency, bootstrap, main/test, YAML/JSON smoke test"
+    },
+    {
+      "passed": true,
+      "check": "REQUIREMENT_TO_TAD",
+      "detail": "Built-in skill loaded, default LlmClient route invoked, quality gate passed: quality-assets/analysis/order-create.prd-b3cc068d.tad.md"
+    },
+    {
+      "passed": true,
+      "check": "TAD_TO_TEST_CASES",
+      "detail": "Built-in skill loaded, default LlmClient route invoked, quality gate passed: quality-assets/testcases/order-create.prd-b3cc068d.testcases.yaml"
+    },
+    {
+      "passed": true,
+      "check": "TEST_CASES_TO_API_SPEC",
+      "detail": "Built-in skill loaded, default LlmClient route invoked, quality gate passed: quality-assets/automation/order-create.prd-b3cc068d.generation-spec.yaml"
+    },
+    {
+      "passed": true,
+      "check": "framework-scaffold",
+      "detail": "14 generated files; main API/DataBuilder, test BaseTest/DataDriveUtil and YAML/JSON5"
+    },
+    {
+      "passed": true,
+      "check": "repeat-generation",
+      "detail": "Identical files reused without modifying POM or bootstrap"
+    },
+    {
+      "passed": true,
+      "check": "manual-edit-protection",
+      "detail": "Regeneration refused after an intentional edit; original restored by this test"
+    },
+    {
+      "passed": true,
+      "check": "upstream-case-protection",
+      "detail": "Unknown sourceCaseId rejected before code generation"
+    },
+    {
+      "passed": true,
+      "check": "TEST_CASES_TO_WEB_ATC",
+      "detail": "Built-in skill loaded, default LlmClient route invoked, quality gate passed: quality-assets/automation/order-create.prd-b3cc068d.atc.yaml"
+    },
+    {
+      "passed": true,
+      "check": "FEEDBACK",
+      "detail": "Built-in skill loaded, default LlmClient route invoked, quality gate passed: quality-assets/automation/order-create.prd-b3cc068d.feedback.yaml"
+    },
+    {
+      "passed": false,
+      "check": "requirement-change-probe",
+      "detail": "Golden mode ignored BR-004 and returned identical three cases; actual AI analysis not validated"
+    },
+    {
+      "passed": true,
+      "check": "real-http-baseline",
+      "detail": "Maven compiled main/test and ran initialization plus GOLD-001/002/003 against independent loopback HTTP fixture"
+    },
+    {
+      "passed": true,
+      "check": "fault-detection",
+      "detail": "Changed zero-quantity response status from 400 to 200; generated tests failed as required"
+    },
+    {
+      "passed": true,
+      "check": "recovery-rerun",
+      "detail": "Restored fixture; full suite passed again"
+    },
+    {
+      "passed": false,
+      "check": "feedback-evidence-consumption",
+      "detail": "Default golden feedback still says not-run after real TestNG evidence; automatic evidence-to-feedback closure is NOT verified"
+    }
+  ],
+  "finishedAt": "2026-10-18T01:44:04.773192400Z",
+  "overallStatus": "GENERATION_AND_HTTP_EXECUTION_VERIFIED_WITH_FEEDBACK_GAP"
+}

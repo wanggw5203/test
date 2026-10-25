@@ -1,0 +1,48 @@
+schemaVersion: 2
+apiCode: golden_order_http_framework_v3
+sourceCaseIds:
+  - GOLD-001
+  - GOLD-002
+  - GOLD-003
+profile: basetest-http
+protocol: HTTP
+types:
+  request: {
+    }
+  response: {
+    }
+  assets: [
+    ]
+evidence: [
+  ]
+status: pending
+projectRoot: E:\AITest\test\validation\local-http-dubbo-flow-20261018\rechecks\manual-20261018-190515-794\http-tests
+manifest: .api-test-generator/golden_order_http_framework_v3/scaffold-manifest.yaml
+cases:
+  - sourceCaseId: GOLD-001
+    name: 正常创建订单
+    thought: 黄金集 order-create-v1，追溯 GOLD-001
+    requestRef: gold-001.json5
+    expectRef: gold-001.json5
+    fields: [
+      ]
+  - sourceCaseId: GOLD-002
+    name: 数量为零
+    thought: 黄金集 order-create-v1，追溯 GOLD-002
+    requestRef: gold-002.json5
+    expectRef: gold-002.json5
+    fields: [
+      ]
+  - sourceCaseId: GOLD-003
+    name: 缺少商品编码
+    thought: 黄金集 order-create-v1，追溯 GOLD-003
+    requestRef: gold-003.json5
+    expectRef: gold-003.json5
+    fields: [
+      ]
+nextSkill: make-api-tests-executable
+rules:
+  - preserve explicit negative values
+  - resolve enum values only from explicit mappings
+  - replace volatile IDs with runtime data references
+  - do not change business expectations to match failures

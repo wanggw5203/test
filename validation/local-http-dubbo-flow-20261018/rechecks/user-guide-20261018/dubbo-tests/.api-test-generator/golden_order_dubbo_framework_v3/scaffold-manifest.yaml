@@ -1,0 +1,61 @@
+schemaVersion: 2
+generatorVersion: 2.1.0
+apiCode: golden_order_dubbo_framework_v3
+sourceCaseIds:
+  - GOLD-001
+  - GOLD-002
+  - GOLD-003
+profile: basetest-dubbo
+protocol: DUBBO
+targetModule: null
+selector:
+  kind: DUBBO_METHOD
+  value: demo.golden.OrderService#create(java.util.Map)
+types:
+  request: {
+    }
+  response: {
+    }
+  assets: [
+    ]
+evidence: [
+  ]
+template: query
+generatedAt: '2026-10-18T11:02:41.917449400Z'
+sourceSpec: E:\AITest\test\validation\local-http-dubbo-flow-20261018\rechecks\user-guide-20261018\dubbo-tests\quality-assets\automation\order-service.prd-6377a5fa.generation-spec.yaml
+sourceSpecSha256: 5d497ae2c65dccfeb8b21e0a348329d43d8ee89b350f62ddfbae6144128b8261
+sourceSpecSemanticSha256: 8849d01e06d3db4e04bd51623a901d194a941bd21a0ad7ed44ac3745cdc3006f
+testClass: src/test/java/demo/golden/framework/v3/dubbo/GoldenOrderDubboTest.java
+suiteFile: src/test/resources/demo/golden/framework/v3/dubbo/golden_order_dubbo_framework_v3.yaml
+executableizationPlan: .api-test-generator/golden_order_dubbo_framework_v3/executableization-plan.yaml
+files:
+  - path: src/test/java/demo/golden/framework/v3/dubbo/GoldenOrderDubboTest.java
+    sha256: 6e4e87012977c7e7c7306fd8b39ced8b32734acf081cfa02f84e6c5f6bc49f83
+  - path: src/test/resources/demo/golden/framework/v3/dubbo/golden_order_dubbo_framework_v3.yaml
+    sha256: 33861821b4182eaed88beef0dd82762d0302a53530fd83c13dff1e1f35560c42
+  - path: src/main/java/demo/golden/framework/v3/dubbo/GoldenOrderDubboTestApi.java
+    sha256: 6207effd900fecaf8884a419e6362be33ce1e36591534ea7b3ac54769efd1b60
+  - path: src/main/java/demo/golden/framework/v3/dubbo/GoldenOrderDubboTestDataBuilder.java
+    sha256: d84b0673856035b7b6570d0c9556079460ba4e65d8f1de51f641dea60025d3d7
+  - path: .api-test-generator/golden_order_dubbo_framework_v3/testng.xml
+    sha256: 7b99f40e0938feaf70eda42db4936d41e39339d1cfa82c62e2c8c09455d2fe2b
+  - path: .api-test-generator/golden_order_dubbo_framework_v3/FRAMEWORK-README.md
+    sha256: 105db8467ba90d4c3d064b4930a7a10fb148ee48afdaf3127cd2596248b17c5c
+  - path: src/test/resources/demo/golden/framework/v3/dubbo/gold-001_req_test.json5
+    sha256: b023c91b8475981ef22406b01c93045b99a42d1c9e638c1b26aefc2da44e5b8a
+  - path: src/test/resources/demo/golden/framework/v3/dubbo/gold-001_exp_test.json5
+    sha256: 05e413558769cdddda91bc3647d6234afe132ce1ea129c71927cb9e1a88183b9
+  - path: src/test/resources/demo/golden/framework/v3/dubbo/gold-002_req_test.json5
+    sha256: d05d668e6805a77b61d202800ad4fdfec1943f51113653b027320f5634ea998d
+  - path: src/test/resources/demo/golden/framework/v3/dubbo/gold-002_exp_test.json5
+    sha256: 751abb9073bb7834421643b61d8188394046c8c5431758bded9b3e0a85e7581e
+  - path: src/test/resources/demo/golden/framework/v3/dubbo/gold-003_req_test.json5
+    sha256: 95763f9c199c6e9871c107fad39c5cf09ebf4d8ec97ba41dd20a642f2a2747d9
+  - path: src/test/resources/demo/golden/framework/v3/dubbo/gold-003_exp_test.json5
+    sha256: f38594bfee6c0bd4300b6d43b0a0fc6ba111dcd4842fc2e3f02a163665c13222
+  - path: .api-test-generator/golden_order_dubbo_framework_v3/executableization-plan.yaml
+    sha256: 5f05fd2002f5f119ec89547e01e322cd50da61e1651aac1ace72ad8da58ef386
+handoff:
+  status: pending-executableization
+  skill: make-api-tests-executable
+  next: process field hints, wire runtime data, compile and run the target test

@@ -1,0 +1,10 @@
+schemaVersion: 1
+initializerVersion: 1.0.0
+projectType: DUBBO
+framework: io.testkit:base-test-toolkit
+frameworkVersion: 1.1.0-SNAPSHOT
+frameworkScope: compile
+basePackage: com.example.automation
+mainSourceRoot: src/main/java
+testSourceRoot: src/test/java
+testResourceRoot: src/test/resources

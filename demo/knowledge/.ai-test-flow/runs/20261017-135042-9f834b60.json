@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "runId": "20261017-135042-9f834b60",
+  "assetId": "manual-prd-b3b60c3166e8.prd-436e9ff2",
+  "workspaceId": "quality-knowledge-base",
+  "team": "quality-engineering",
+  "pluginVersion": "1.3.1",
+  "mode": "GOLDEN_DEMO",
+  "goldenDataset": "order-create-v1",
+  "model": "fixture:order-create-v1",
+  "automationContract": {
+    "feedback": "feedback.yaml",
+    "generationSpec": "generation-spec.yaml",
+    "handoffMode": "GIT_ASSET",
+    "executeFromPlugin": false,
+    "framework": "TestNG",
+    "scaffoldGenerator": "BUNDLED",
+    "interfaceDiscovery": "InterfaceDiscoveryProvider",
+    "protectModifiedScaffolds": true
+  },
+  "startedAt": "2026-10-17T13:50:42.819724Z",
+  "source": {
+    "sha256": "b3b60c3166e8439a9f80759ff3fc17386c0904c5cfb3d86d738cec75b2b85e51",
+    "path": "quality-assets/inputs/manual/manual-prd-b3b60c3166e8.prd.txt"
+  },
+  "inputs": [
+    "quality-assets/inputs/manual/manual-prd-b3b60c3166e8.prd.txt"
+  ],
+  "evidencePath": "quality-assets/evidence/manual-prd-b3b60c3166e8.prd-436e9ff2-5b05f7e7757f.evidence.md",
+  "stages": [
+    {
+      "stage": "REQUIREMENT_TO_TAD",
+      "skill": "requirement-to-tad",
+      "status": "PASSED",
+      "path": "quality-assets/analysis/manual-prd-b3b60c3166e8.prd-436e9ff2.tad.md",
+      "sha256": "97526a4efa51e3362d9805d0fef7c322e7ef96bd3746c2b347724a32229a3add",
+      "qualityGate": {
+        "passed": true,
+        "errors": []
+      },
+      "completedAt": "2026-10-17T13:50:42.887722300Z"
+    }
+  ],
+  "status": "COMPLETED",
+  "completedAt": "2026-10-17T13:50:42.925722300Z",
+  "durationMillis": 105
+}

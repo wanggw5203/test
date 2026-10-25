@@ -1,0 +1,4 @@
+// 缺少商品编码 - test expected response
+{
+  "code": "SKU_REQUIRED"
+}

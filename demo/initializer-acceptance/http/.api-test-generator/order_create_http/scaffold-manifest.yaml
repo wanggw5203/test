@@ -1,0 +1,66 @@
+schemaVersion: 2
+generatorVersion: 2.1.0
+apiCode: order_create_http
+sourceCaseIds:
+  - TC-ORDER-HTTP-001
+profile: basetest-http
+protocol: HTTP
+targetModule: order-service
+selector:
+  kind: HTTP_PATH
+  value: POST /api/orders
+types:
+  request:
+    kind: BO
+    fqcn: com.example.order.CreateOrderBO
+    sourceFile: null
+    sha256: null
+    fields: [
+      ]
+  response:
+    kind: VO
+    fqcn: com.example.order.OrderVO
+    sourceFile: null
+    sha256: null
+    fields: [
+      ]
+  assets: [
+    ]
+evidence:
+  - order: 1
+    kind: CONTROLLER
+    symbol: com.example.order.OrderController#create
+    file: order-service/src/main/java/com/example/order/OrderController.java
+    line: null
+    sha256: null
+template: query
+generatedAt: '2026-10-18T01:38:08.401698400Z'
+sourceSpec: E:\AITest\test\demo\initializer-acceptance\http\quality-assets\inputs\http-spec.yaml
+sourceSpecSha256: 75f63b66216af36c83990b001f17e47ea245a59f17d24f76088fba7e039c9792
+sourceSpecSemanticSha256: bd50e6d3d34ed66d2f862a44bd170c66c271dfe0f50ef0020f0197a3d8f779bf
+testClass: src/test/java/com/example/automation/order/OrderCreateHttpGeneratedTests.java
+suiteFile: src/test/resources/com/example/automation/order/order-create-http.yaml
+executableizationPlan: .api-test-generator/order_create_http/executableization-plan.yaml
+files:
+  - path: src/test/java/com/example/automation/order/OrderCreateHttpGeneratedTests.java
+    sha256: 3a9a70570373517ee2620152a8a882ae6ff77b629e905d334c5c5649bf45737f
+  - path: src/test/resources/com/example/automation/order/order-create-http.yaml
+    sha256: 76bf7815fef7dd18a9df64a2763cc84906f838b3e2ab059735a2be2a7261c5cf
+  - path: src/main/java/com/example/automation/order/OrderCreateHttpGeneratedTestsApi.java
+    sha256: ebcbb65b023e25393c226477845df2a7ab40f0bcb1e1170d36e05ea69caae5c7
+  - path: src/main/java/com/example/automation/order/OrderCreateHttpGeneratedTestsDataBuilder.java
+    sha256: 103edcb4ae88b104c56a34d8bd15324332fefb99c88b15960a669466af7919c6
+  - path: .api-test-generator/order_create_http/testng.xml
+    sha256: 2bb5d1ea176768d26064ee6f9da9a500c9d4dc7957a44eae4ceca40f08d60e45
+  - path: .api-test-generator/order_create_http/FRAMEWORK-README.md
+    sha256: 20fecb98072b7ab4ca7cdeb8414a1eb4b12238708715fe2d3d07508f15d369c1
+  - path: src/test/resources/com/example/automation/order/01_create_order_success_req_test.json5
+    sha256: 75e89a66e7d05c340c6e060e99d36017efb3b59b7cb7041aa9e85c22bb977659
+  - path: src/test/resources/com/example/automation/order/01_create_order_success_exp_test.json5
+    sha256: 573e1083f7e7974b747772c0dd98873194f70ed5b797c363191e552ae7ac31fb
+  - path: .api-test-generator/order_create_http/executableization-plan.yaml
+    sha256: 5e8a0b645ab5f109125d4a8cd8609c887e14e1ff958913bed77a868ad1d8b114
+handoff:
+  status: pending-executableization
+  skill: make-api-tests-executable
+  next: process field hints, wire runtime data, compile and run the target test

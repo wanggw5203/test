@@ -1,0 +1,8 @@
+// 正常创建订单 - test expected response
+{
+  "body": {
+    "orderId": "ORDER-DEMO-001",
+    "code": "OK"
+  },
+  "status": 201
+}

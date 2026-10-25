@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "workspaceId": "quality-knowledge-base",
+  "team": "quality-engineering",
+  "expectedTeamSize": 100,
+  "maxBatchSize": 100,
+  "tadWriteMode": "IN_PLACE_MARKDOWN",
+  "paths": {
+    "inputs": "quality-assets/inputs",
+    "evidence": "quality-assets/evidence",
+    "analysis": "quality-assets/analysis",
+    "testcases": "quality-assets/testcases",
+    "automation": "quality-assets/automation",
+    "manifests": ".ai-test-flow/manifests",
+    "runs": ".ai-test-flow/runs",
+    "rejected": ".ai-test-flow/rejected"
+  },
+  "gates": {
+    "rejectEmptyOutput": true,
+    "requireTadSections": true,
+    "requireUniqueCaseIds": true,
+    "requireTraceability": true
+  },
+  "automation": {
+    "framework": "TestNG",
+    "handoffMode": "GIT_ASSET",
+    "executeFromPlugin": false,
+    "generationSpecContract": "generation-spec.yaml",
+    "feedbackContract": "feedback.yaml"
+  },
+  "requiredReviewers": ["test-owner", "development-owner"]
+}

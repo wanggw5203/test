@@ -1,0 +1,47 @@
+schemaVersion: 2
+apiCode: order_create_http
+sourceCaseIds:
+  - TC-ORDER-HTTP-001
+profile: basetest-http
+protocol: HTTP
+types:
+  request:
+    kind: BO
+    fqcn: com.example.order.CreateOrderBO
+    sourceFile: null
+    sha256: null
+    fields: [
+      ]
+  response:
+    kind: VO
+    fqcn: com.example.order.OrderVO
+    sourceFile: null
+    sha256: null
+    fields: [
+      ]
+  assets: [
+    ]
+evidence:
+  - order: 1
+    kind: CONTROLLER
+    symbol: com.example.order.OrderController#create
+    file: order-service/src/main/java/com/example/order/OrderController.java
+    line: null
+    sha256: null
+status: pending
+projectRoot: E:\AITest\test\demo\plugin-v15-acceptance\http
+manifest: .api-test-generator/order_create_http/scaffold-manifest.yaml
+cases:
+  - sourceCaseId: TC-ORDER-HTTP-001
+    name: 有效参数创建订单成功
+    thought: 验证合法 SKU 和数量能够创建订单
+    requestRef: 01_create_order_success.json
+    expectRef: 01_create_order_success.json
+    fields: [
+      ]
+nextSkill: make-api-tests-executable
+rules:
+  - preserve explicit negative values
+  - resolve enum values only from explicit mappings
+  - replace volatile IDs with runtime data references
+  - do not change business expectations to match failures

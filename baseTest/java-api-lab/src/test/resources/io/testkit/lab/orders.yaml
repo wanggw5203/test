@@ -1,0 +1,16 @@
+testDataSuite:
+  description: Real HTTP order lifecycle
+  cases:
+    - name: order-coupon
+      request: [coupon-request.json5]
+      expect: [coupon-response.json5]
+    - name: order-full-price
+      request: [full-request.json5]
+      expect: [full-response.json5]
+    - name: order-max-quantity
+      request: [max-request.json5]
+      expect: [max-response.json5]
+    - name: disabled-example
+      enabled: false
+      request: [full-request.json5]
+      expect: [full-response.json5]

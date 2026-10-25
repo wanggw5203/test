@@ -1,0 +1,5 @@
+// 正常创建订单 - test expected response
+{
+  "code": "OK",
+  "orderId": "ORDER-DEMO-001"
+}

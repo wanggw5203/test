@@ -1,0 +1,31 @@
+testDataSuite:
+  description: Quick start demo - order creation suite
+  cases:
+    - name: apply coupon discount
+      enabled: true
+      thought: coupon SAVE20 reduces total by 20
+      users:
+        - reviewer
+      mockId: inventory-ok
+      request:
+        - order-coupon-request.json5
+      expect:
+        - order-coupon-response.json5
+      extraParams:
+        channel: web
+    - name: full price without coupon
+      enabled: true
+      thought: orders without coupon keep full price
+      users:
+        - reviewer
+      request:
+        - order-fullprice-request.json5
+      expect:
+        - order-fullprice-response.json5
+    - name: disabled example
+      enabled: false
+      thought: disabled cases are filtered out by DataDriveUtil
+      request:
+        - order-coupon-request.json5
+      expect:
+        - order-coupon-response.json5

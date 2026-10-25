@@ -1,0 +1,5 @@
+pytest>=8.0
+PyYAML>=6.0
+requests>=2.31
+responses>=0.25
+deepdiff>=7.0

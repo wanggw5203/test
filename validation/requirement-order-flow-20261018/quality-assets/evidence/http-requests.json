@@ -1,0 +1,65 @@
+[
+  {
+    "input": "{\"quantity\":1,\"sku\":\"SKU-DEMO\"}",
+    "path": "/demo/orders",
+    "responseStatus": 201,
+    "faulty": false,
+    "method": "POST"
+  },
+  {
+    "input": "{\"quantity\":0,\"sku\":\"SKU-DEMO\"}",
+    "path": "/demo/orders",
+    "responseStatus": 400,
+    "faulty": false,
+    "method": "POST"
+  },
+  {
+    "input": "{\"quantity\":1}",
+    "path": "/demo/orders",
+    "responseStatus": 400,
+    "faulty": false,
+    "method": "POST"
+  },
+  {
+    "input": "{\"quantity\":1,\"sku\":\"SKU-DEMO\"}",
+    "path": "/demo/orders",
+    "responseStatus": 201,
+    "faulty": true,
+    "method": "POST"
+  },
+  {
+    "input": "{\"quantity\":0,\"sku\":\"SKU-DEMO\"}",
+    "path": "/demo/orders",
+    "responseStatus": 200,
+    "faulty": true,
+    "method": "POST"
+  },
+  {
+    "input": "{\"quantity\":1}",
+    "path": "/demo/orders",
+    "responseStatus": 400,
+    "faulty": true,
+    "method": "POST"
+  },
+  {
+    "input": "{\"quantity\":1,\"sku\":\"SKU-DEMO\"}",
+    "path": "/demo/orders",
+    "responseStatus": 201,
+    "faulty": false,
+    "method": "POST"
+  },
+  {
+    "input": "{\"quantity\":0,\"sku\":\"SKU-DEMO\"}",
+    "path": "/demo/orders",
+    "responseStatus": 400,
+    "faulty": false,
+    "method": "POST"
+  },
+  {
+    "input": "{\"quantity\":1}",
+    "path": "/demo/orders",
+    "responseStatus": 400,
+    "faulty": false,
+    "method": "POST"
+  }
+]

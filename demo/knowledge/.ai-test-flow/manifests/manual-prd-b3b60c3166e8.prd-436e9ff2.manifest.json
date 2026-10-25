@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "runId": "20261017-162018-9c982e09",
+  "assetId": "manual-prd-b3b60c3166e8.prd-436e9ff2",
+  "workspaceId": "quality-knowledge-base",
+  "team": "quality-engineering",
+  "pluginVersion": "1.4.0",
+  "mode": "GOLDEN_DEMO",
+  "goldenDataset": "order-create-v1",
+  "model": "fixture:order-create-v1",
+  "automationContract": {
+    "feedback": "feedback.yaml",
+    "generationSpec": "generation-spec.yaml",
+    "handoffMode": "GIT_ASSET",
+    "executeFromPlugin": false,
+    "framework": "TestNG",
+    "scaffoldGenerator": "BUNDLED",
+    "interfaceDiscovery": "InterfaceDiscoveryProvider",
+    "protectModifiedScaffolds": true
+  },
+  "startedAt": "2026-10-17T16:20:18.704850200Z",
+  "source": {
+    "sha256": "b3b60c3166e8439a9f80759ff3fc17386c0904c5cfb3d86d738cec75b2b85e51",
+    "path": "quality-assets/inputs/manual/manual-prd-b3b60c3166e8.prd.txt"
+  },
+  "inputs": [
+    "quality-assets/inputs/manual/manual-prd-b3b60c3166e8.prd.txt"
+  ],
+  "evidencePath": "quality-assets/evidence/manual-prd-b3b60c3166e8.prd-436e9ff2-5b05f7e7757f.evidence.md",
+  "stages": [
+    {
+      "stage": "GENERATE_API_SCAFFOLD",
+      "status": "PASSED",
+      "protocol": "HTTP",
+      "selector": {
+        "kind": "HTTP_PATH",
+        "value": "POST /demo/orders"
+      },
+      "apiCode": "golden_order_http_framework_v2",
+      "manifestPath": ".api-test-generator/golden_order_http_framework_v2/scaffold-manifest.yaml",
+      "executableizationPlanPath": ".api-test-generator/golden_order_http_framework_v2/executableization-plan.yaml",
+      "generatedFiles": [
+        "src/test/java/demo/golden/framework/http/GoldenOrderHttpTest.java",
+        "src/test/resources/demo/golden/framework/http/golden_order_http_framework_v2.yaml",
+        "src/test/java/demo/golden/framework/http/GoldenOrderHttpTestApi.java",
+        "src/test/java/demo/golden/framework/http/GoldenOrderHttpTestDataBuilder.java",
+        ".api-test-generator/golden_order_http_framework_v2/testng.xml",
+        ".api-test-generator/golden_order_http_framework_v2/pom.xml",
+        ".api-test-generator/golden_order_http_framework_v2/FRAMEWORK-README.md",
+        "src/test/resources/demo/golden/framework/http/gold-001_req_test.json5",
+        "src/test/resources/demo/golden/framework/http/gold-001_exp_test.json5",
+        "src/test/resources/demo/golden/framework/http/gold-002_req_test.json5",
+        "src/test/resources/demo/golden/framework/http/gold-002_exp_test.json5",
+        "src/test/resources/demo/golden/framework/http/gold-003_req_test.json5",
+        "src/test/resources/demo/golden/framework/http/gold-003_exp_test.json5",
+        ".api-test-generator/golden_order_http_framework_v2/executableization-plan.yaml",
+        ".api-test-generator/golden_order_http_framework_v2/scaffold-manifest.yaml"
+      ],
+      "completedAt": "2026-10-17T16:20:18.799192700Z"
+    }
+  ],
+  "status": "COMPLETED",
+  "completedAt": "2026-10-17T16:20:18.820191700Z",
+  "durationMillis": 115
+}

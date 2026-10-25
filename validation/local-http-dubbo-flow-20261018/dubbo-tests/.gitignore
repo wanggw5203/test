@@ -1,0 +1,5 @@
+target/
+.idea/
+*.iml
+.env
+# Inputs and quality assets must remain versioned.

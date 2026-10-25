@@ -1,0 +1,5 @@
+// 数量为零 - test request
+{
+  "quantity": 0,
+  "sku": "SKU-DEMO"
+}

@@ -1,0 +1,65 @@
+# GOLDEN DEMO order-create-v1：合成演练契约，未执行真实测试
+apiCode: golden_order_dubbo_framework_v3
+cases:
+- expect:
+    base:
+      code: OK
+      orderId: ORDER-DEMO-001
+  expectRef: gold-001.json5
+  name: 正常创建订单
+  request:
+    base:
+      quantity: 1
+      sku: SKU-DEMO
+  requestRef: gold-001.json5
+  sourceCaseId: GOLD-001
+  thought: 黄金集 order-create-v1，追溯 GOLD-001
+- expect:
+    base:
+      code: INVALID_QUANTITY
+  expectRef: gold-002.json5
+  name: 数量为零
+  request:
+    base:
+      quantity: 0
+      sku: SKU-DEMO
+  requestRef: gold-002.json5
+  sourceCaseId: GOLD-002
+  thought: 黄金集 order-create-v1，追溯 GOLD-002
+- expect:
+    base:
+      code: SKU_REQUIRED
+  expectRef: gold-003.json5
+  name: 缺少商品编码
+  request:
+    base:
+      quantity: 1
+  requestRef: gold-003.json5
+  sourceCaseId: GOLD-003
+  thought: 黄金集 order-create-v1，追溯 GOLD-003
+className: GoldenOrderDubboTest
+dataKey: golden_order_dubbo_framework_v3
+description: 黄金集演练：创建订单；未执行真实测试
+endpoint:
+  dubboMethod: create
+  interfaceName: demo.golden.OrderService
+  parameterTypes:
+  - java.util.Map
+environments:
+- test
+evidence: []
+generator:
+  profile: basetest-dubbo
+packageName: demo.golden.framework.v3.dubbo
+schemaVersion: 2
+selector:
+  kind: DUBBO_METHOD
+  value: demo.golden.OrderService#create(java.util.Map)
+sourceCaseIds:
+- GOLD-001
+- GOLD-002
+- GOLD-003
+target:
+  protocol: DUBBO
+types:
+  assets: []

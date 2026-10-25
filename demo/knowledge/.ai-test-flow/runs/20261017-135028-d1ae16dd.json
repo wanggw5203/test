@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "runId": "20261017-135028-d1ae16dd",
+  "assetId": "manual-prd-b3b60c3166e8.prd-436e9ff2",
+  "workspaceId": "quality-knowledge-base",
+  "team": "quality-engineering",
+  "pluginVersion": "1.3.1",
+  "mode": "GOLDEN_DEMO",
+  "goldenDataset": "order-create-v1",
+  "model": "fixture:order-create-v1",
+  "automationContract": {
+    "feedback": "feedback.yaml",
+    "generationSpec": "generation-spec.yaml",
+    "handoffMode": "GIT_ASSET",
+    "executeFromPlugin": false,
+    "framework": "TestNG",
+    "scaffoldGenerator": "BUNDLED",
+    "interfaceDiscovery": "InterfaceDiscoveryProvider",
+    "protectModifiedScaffolds": true
+  },
+  "startedAt": "2026-10-17T13:50:28.519741200Z",
+  "source": {
+    "sha256": "b3b60c3166e8439a9f80759ff3fc17386c0904c5cfb3d86d738cec75b2b85e51",
+    "path": "quality-assets/inputs/manual/manual-prd-b3b60c3166e8.prd.txt"
+  },
+  "inputs": [
+    "quality-assets/inputs/manual/manual-prd-b3b60c3166e8.prd.txt"
+  ],
+  "evidencePath": "quality-assets/evidence/manual-prd-b3b60c3166e8.prd-436e9ff2-5b05f7e7757f.evidence.md",
+  "stages": [
+    {
+      "stage": "REQUIREMENT_TO_TAD",
+      "skill": "requirement-to-tad",
+      "status": "PASSED",
+      "path": "quality-assets/analysis/manual-prd-b3b60c3166e8.prd-436e9ff2.tad.md",
+      "sha256": "97526a4efa51e3362d9805d0fef7c322e7ef96bd3746c2b347724a32229a3add",
+      "qualityGate": {
+        "passed": true,
+        "errors": []
+      },
+      "completedAt": "2026-10-17T13:50:28.611741Z"
+    },
+    {
+      "stage": "TAD_TO_TEST_CASES",
+      "skill": "tad-to-test-yaml",
+      "status": "PASSED",
+      "path": "quality-assets/testcases/manual-prd-b3b60c3166e8.prd-436e9ff2.testcases.yaml",
+      "sha256": "f0c2a2139a45b38608bb9ea9430aa3276a13811003ef8d2f0713412b738a1e90",
+      "qualityGate": {
+        "passed": true,
+        "errors": []
+      },
+      "completedAt": "2026-10-17T13:50:28.771304Z"
+    },
+    {
+      "stage": "TEST_CASES_TO_API_SPEC",
+      "skill": "api-test-automation-workflow",
+      "status": "PASSED",
+      "path": "quality-assets/automation/manual-prd-b3b60c3166e8.prd-436e9ff2.generation-spec.yaml",
+      "sha256": "ee076cb09dea8e2d723a4ed16f4edcf046058f5e7805cee9f012d6387c9deeaf",
+      "qualityGate": {
+        "passed": true,
+        "errors": []
+      },
+      "completedAt": "2026-10-17T13:50:29.016300700Z"
+    },
+    {
+      "stage": "GENERATE_API_SCAFFOLD",
+      "status": "PASSED",
+      "protocol": "HTTP",
+      "selector": {
+        "kind": "HTTP_PATH",
+        "value": "POST /demo/orders"
+      },
+      "apiCode": "golden_order_http_v1",
+      "manifestPath": ".api-test-generator/golden_order_http_v1/scaffold-manifest.yaml",
+      "executableizationPlanPath": ".api-test-generator/golden_order_http_v1/executableization-plan.yaml",
+      "generatedFiles": [
+        "src/test/java/demo/golden/http/GoldenOrderHttpTest.java",
+        "src/test/resources/demo/golden/http/golden_order_http_v1.yaml",
+        "src/test/resources/demo/golden/http/gold-001_req_test.json5",
+        "src/test/resources/demo/golden/http/gold-001_exp_test.json5",
+        "src/test/resources/demo/golden/http/gold-002_req_test.json5",
+        "src/test/resources/demo/golden/http/gold-002_exp_test.json5",
+        "src/test/resources/demo/golden/http/gold-003_req_test.json5",
+        "src/test/resources/demo/golden/http/gold-003_exp_test.json5",
+        ".api-test-generator/golden_order_http_v1/executableization-plan.yaml",
+        ".api-test-generator/golden_order_http_v1/scaffold-manifest.yaml"
+      ],
+      "completedAt": "2026-10-17T13:50:29.430778400Z"
+    },
+    {
+      "stage": "TEST_CASES_TO_WEB_ATC",
+      "skill": "test-yaml-to-web-atc",
+      "status": "PASSED",
+      "path": "quality-assets/automation/manual-prd-b3b60c3166e8.prd-436e9ff2.atc.yaml",
+      "sha256": "65737cffb447ccb0a47a06728685b66a7a201ff8771ceca99d7b5cf02e237261",
+      "qualityGate": {
+        "passed": true,
+        "errors": []
+      },
+      "completedAt": "2026-10-17T13:50:29.761435800Z"
+    },
+    {
+      "stage": "FEEDBACK",
+      "skill": "close-atc-feedback-loop",
+      "status": "PASSED",
+      "path": "quality-assets/automation/manual-prd-b3b60c3166e8.prd-436e9ff2.feedback.yaml",
+      "sha256": "d383862a968718e66b171c5577df5870f2a37c37c7a73879eb69eaf3ed513916",
+      "qualityGate": {
+        "passed": true,
+        "errors": []
+      },
+      "completedAt": "2026-10-17T13:50:30.025964100Z"
+    }
+  ],
+  "status": "COMPLETED",
+  "completedAt": "2026-10-17T13:50:30.144395Z",
+  "durationMillis": 1624
+}

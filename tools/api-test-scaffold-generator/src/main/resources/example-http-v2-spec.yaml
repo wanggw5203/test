@@ -1,0 +1,55 @@
+schemaVersion: 2
+apiCode: order_create_http
+sourceCaseIds:
+  - TC-ORDER-HTTP-001
+description: 创建订单 HTTP 接口
+packageName: com.example.automation.order
+resourcePackage: com.example.automation.order
+className: OrderCreateHttpGeneratedTests
+author: quality-engineering
+dataKey: order-create-http
+environments:
+  - test
+target:
+  protocol: HTTP
+  module: order-service
+selector:
+  kind: HTTP_PATH
+  value: POST /api/orders
+endpoint:
+  method: POST
+  path: /api/orders
+  authenticated: false
+  headers:
+    X-Test-Source: ai-test-flow
+types:
+  request:
+    kind: BO
+    fqcn: com.example.order.CreateOrderBO
+  response:
+    kind: VO
+    fqcn: com.example.order.OrderVO
+evidence:
+  - order: 1
+    kind: CONTROLLER
+    symbol: com.example.order.OrderController#create
+    file: order-service/src/main/java/com/example/order/OrderController.java
+generator:
+  profile: basetest-http
+  baseUrlProperty: api.baseUrl
+  defaultBaseUrl: http://localhost:8080/
+cases:
+  - sourceCaseId: TC-ORDER-HTTP-001
+    name: 有效参数创建订单成功
+    thought: 验证合法 SKU 和数量能够创建订单
+    requestRef: 01_create_order_success.json
+    expectRef: 01_create_order_success.json
+    request:
+      base:
+        sku: SKU-001
+        quantity: 1
+    expect:
+      base:
+        status: 200
+        body:
+          success: true

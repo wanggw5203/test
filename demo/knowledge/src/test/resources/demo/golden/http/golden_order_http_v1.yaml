@@ -1,0 +1,27 @@
+testDataSuite:
+  description: 黄金集演练：创建订单；未执行真实测试
+  cases:
+    - sourceCaseId: GOLD-001
+      name: 正常创建订单
+      thought: 黄金集 order-create-v1，追溯 GOLD-001
+      mockId: null
+      request:
+        - gold-001.json5
+      expect:
+        - gold-001.json5
+    - sourceCaseId: GOLD-002
+      name: 数量为零
+      thought: 黄金集 order-create-v1，追溯 GOLD-002
+      mockId: null
+      request:
+        - gold-002.json5
+      expect:
+        - gold-002.json5
+    - sourceCaseId: GOLD-003
+      name: 缺少商品编码
+      thought: 黄金集 order-create-v1，追溯 GOLD-003
+      mockId: null
+      request:
+        - gold-003.json5
+      expect:
+        - gold-003.json5

@@ -1,0 +1,73 @@
+{
+  "scope": "Standalone provider, real HTTP and Dubbo TCP, separate JVMs; AI outputs remain GoldenDemo fixtures",
+  "provider": {
+    "dubboDirectUrl": "dubbo://[::1]:20891",
+    "pid": 16024,
+    "parameterTypes": [
+      "java.util.Map"
+    ],
+    "method": "create",
+    "httpBaseUrl": "http://127.0.0.1:18081/",
+    "interface": "demo.golden.OrderService"
+  },
+  "startedAt": "2026-10-18T02:17:47.182773900Z",
+  "results": [
+    {
+      "failed": 0,
+      "evidence": "quality-assets/evidence/run-1792289867182/baseline-results.jsonl",
+      "passed": 4,
+      "phase": "baseline",
+      "protocol": "HTTP",
+      "exitCode": 0
+    },
+    {
+      "failed": 0,
+      "evidence": "quality-assets/evidence/run-1792289867182/baseline-results.jsonl",
+      "passed": 4,
+      "phase": "baseline",
+      "protocol": "DUBBO",
+      "exitCode": 0
+    },
+    {
+      "failed": 1,
+      "evidence": "quality-assets/evidence/run-1792289867182/fault-injection-results.jsonl",
+      "passed": 3,
+      "phase": "fault-injection",
+      "protocol": "HTTP",
+      "exitCode": 1
+    },
+    {
+      "failed": 1,
+      "evidence": "quality-assets/evidence/run-1792289867182/fault-injection-results.jsonl",
+      "passed": 3,
+      "phase": "fault-injection",
+      "protocol": "DUBBO",
+      "exitCode": 1
+    },
+    {
+      "failed": 0,
+      "evidence": "quality-assets/evidence/run-1792289867182/recovered-results.jsonl",
+      "passed": 4,
+      "phase": "recovered",
+      "protocol": "HTTP",
+      "exitCode": 0
+    },
+    {
+      "failed": 0,
+      "evidence": "quality-assets/evidence/run-1792289867182/recovered-results.jsonl",
+      "passed": 4,
+      "phase": "recovered",
+      "protocol": "DUBBO",
+      "exitCode": 0
+    }
+  ],
+  "overallStatus": "BOTH_PROTOCOLS_EXECUTED_FAULT_DETECTED_AND_RECOVERED; GOLDEN_AI_FEEDBACK_GAP_REMAINS",
+  "limitations": [
+    "No real model semantic analysis",
+    "Default GoldenDemo feedback remains not-run even with actual logs",
+    "No IDE GUI/VFS click-through validation",
+    "Local designed service, not company backend",
+    "No registry or database integration"
+  ],
+  "finishedAt": "2026-10-18T02:18:13.891874600Z"
+}

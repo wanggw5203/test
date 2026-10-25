@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.testkit</groupId>
+    <artifactId>testkit-parent</artifactId>
+    <version>1.1.0-SNAPSHOT</version>
+    <relativePath>testkit-parent/pom.xml</relativePath>
+  </parent>
+  <artifactId>automation-workspace</artifactId>
+  <packaging>pom</packaging>
+  <name>Testkit Automation Workspace</name>
+  <description>Build, verification and distribution workspace for the Testkit automation framework.</description>
+  <modules>
+    <module>testkit-parent</module>
+    <module>testkit-bom</module>
+    <module>base-test-toolkit</module>
+    <module>enterprise-adapters</module>
+    <module>java-api-lab</module>
+    <module>enterprise-team-example</module>
+  </modules>
+  <profiles>
+    <profile>
+      <id>supply-chain</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.cyclonedx</groupId>
+            <artifactId>cyclonedx-maven-plugin</artifactId>
+            <version>2.9.1</version>
+            <inherited>false</inherited>
+            <configuration>
+              <schemaVersion>1.6</schemaVersion>
+              <includeTestScope>true</includeTestScope>
+              <includeBomSerialNumber>true</includeBomSerialNumber>
+              <outputReactorProjects>false</outputReactorProjects>
+              <outputFormat>all</outputFormat>
+              <outputName>testkit-sbom</outputName>
+              <skipAttach>true</skipAttach>
+            </configuration>
+            <executions>
+              <execution>
+                <id>aggregate-test-supply-chain</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>makeAggregateBom</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

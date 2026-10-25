@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "runId": "20261017-150224-73b4eeb1",
+  "assetId": "manual-prd-b3b60c3166e8.prd-436e9ff2",
+  "workspaceId": "quality-knowledge-base",
+  "team": "quality-engineering",
+  "pluginVersion": "1.3.2",
+  "mode": "GOLDEN_DEMO",
+  "goldenDataset": "order-create-v1",
+  "model": "fixture:order-create-v1",
+  "automationContract": {
+    "scaffoldGenerator": "BUNDLED",
+    "framework": "TestNG",
+    "executeFromPlugin": false,
+    "handoffMode": "GIT_ASSET",
+    "generationSpec": "generation-spec.yaml",
+    "feedback": "feedback.yaml",
+    "protectModifiedScaffolds": true,
+    "interfaceDiscovery": "InterfaceDiscoveryProvider"
+  },
+  "startedAt": "2026-10-17T15:02:24.599606300Z",
+  "source": {
+    "sha256": "b3b60c3166e8439a9f80759ff3fc17386c0904c5cfb3d86d738cec75b2b85e51",
+    "path": "quality-assets/inputs/manual/manual-prd-b3b60c3166e8.prd.txt"
+  },
+  "inputs": [
+    "quality-assets/inputs/manual/manual-prd-b3b60c3166e8.prd.txt"
+  ],
+  "evidencePath": "quality-assets/evidence/manual-prd-b3b60c3166e8.prd-436e9ff2-5b05f7e7757f.evidence.md",
+  "stages": [
+    {
+      "stage": "TEST_CASES_TO_API_SPEC",
+      "message": "生成规格已改变或旧版清单缺少源摘要。请评审已有资产并使用新的输出目录/接口版本生成；未覆盖任何文件。",
+      "completedAt": "2026-10-17T15:02:24.659747400Z",
+      "status": "FAILED"
+    }
+  ],
+  "status": "FAILED"
+}

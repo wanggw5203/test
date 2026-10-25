@@ -1,0 +1,15 @@
+feedback:
+  protocol: DUBBO
+  status: passed
+  scope: local actual protocol execution only
+  sourceCaseIds: [GOLD-001, GOLD-002, GOLD-003]
+  evidence: quality-assets/evidence/run-1792289725772/recovered-results.jsonl
+  producer: deterministic acceptance harness reading actual reports, NOT AI or plugin
+    feedback stage
+  executions:
+  - {phase: baseline, protocol: DUBBO, exitCode: 0, failed: 0, evidence: quality-assets/evidence/run-1792289725772/baseline-results.jsonl,
+    passed: 4}
+  - {phase: fault-injection, protocol: DUBBO, exitCode: 1, failed: 1, evidence: quality-assets/evidence/run-1792289725772/fault-injection-results.jsonl,
+    passed: 3}
+  - {phase: recovered, protocol: DUBBO, exitCode: 0, failed: 0, evidence: quality-assets/evidence/run-1792289725772/recovered-results.jsonl,
+    passed: 4}

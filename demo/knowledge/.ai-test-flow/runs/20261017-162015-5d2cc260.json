@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "runId": "20261017-162015-5d2cc260",
+  "assetId": "manual-prd-b3b60c3166e8.prd-436e9ff2",
+  "workspaceId": "quality-knowledge-base",
+  "team": "quality-engineering",
+  "pluginVersion": "1.4.0",
+  "mode": "GOLDEN_DEMO",
+  "goldenDataset": "order-create-v1",
+  "model": "fixture:order-create-v1",
+  "automationContract": {
+    "feedback": "feedback.yaml",
+    "generationSpec": "generation-spec.yaml",
+    "handoffMode": "GIT_ASSET",
+    "executeFromPlugin": false,
+    "framework": "TestNG",
+    "scaffoldGenerator": "BUNDLED",
+    "interfaceDiscovery": "InterfaceDiscoveryProvider",
+    "protectModifiedScaffolds": true
+  },
+  "startedAt": "2026-10-17T16:20:15.951095100Z",
+  "source": {
+    "sha256": "b3b60c3166e8439a9f80759ff3fc17386c0904c5cfb3d86d738cec75b2b85e51",
+    "path": "quality-assets/inputs/manual/manual-prd-b3b60c3166e8.prd.txt"
+  },
+  "inputs": [
+    "quality-assets/inputs/manual/manual-prd-b3b60c3166e8.prd.txt"
+  ],
+  "evidencePath": "quality-assets/evidence/manual-prd-b3b60c3166e8.prd-436e9ff2-5b05f7e7757f.evidence.md",
+  "stages": [
+    {
+      "stage": "TEST_CASES_TO_API_SPEC",
+      "skill": "api-test-automation-workflow",
+      "status": "PASSED",
+      "path": "quality-assets/automation/manual-prd-b3b60c3166e8.prd-436e9ff2.generation-spec.yaml",
+      "sha256": "f72bfc52cb173cd8803b11c795026050bcbb4123ed11bd8ed1234c49dbe36ee1",
+      "qualityGate": {
+        "passed": true,
+        "errors": []
+      },
+      "completedAt": "2026-10-17T16:20:16.210833900Z"
+    }
+  ],
+  "status": "COMPLETED",
+  "completedAt": "2026-10-17T16:20:16.252413500Z",
+  "durationMillis": 301
+}
