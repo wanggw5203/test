@@ -2,9 +2,24 @@ package io.testkit.basetest.job;
 
 import java.util.Map;
 
-public record JobRequest(String application, String handler, String environment,
-                         String lane, Map<String, Object> parameters) {
-    public JobRequest {
-        parameters = Map.copyOf(parameters == null ? Map.of() : parameters);
-    }
+public record JobRequest(
+    String application,
+    String handler,
+    String environment,
+    String lane,
+    Map<String, Object> parameters) {
+  public JobRequest {
+    parameters = Map.copyOf(parameters == null ? Map.of() : parameters);
+  }
+
+  @Override
+  public String toString() {
+    return "JobRequest[application="
+        + application
+        + ", handler="
+        + handler
+        + ", environment="
+        + environment
+        + ", parameters=<omitted>]";
+  }
 }

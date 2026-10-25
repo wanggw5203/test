@@ -1,8 +1,7 @@
 package io.testkit.basetest.runtime;
 
 public interface ResultPublisher {
-    void publish(TestResultRecord result);
+  void publish(TestResultRecord result);
 
-    default void complete(TestRunSummary summary) {
-    }
+  default void complete(TestRunSummary summary) {}
 }

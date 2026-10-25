@@ -4,6 +4,12 @@
 
 ## 文档入口
 
+- [HTTP/Dubbo 调用诊断日志](PROTOCOL-LOGGING.md)：请求/响应、用例关联、脱敏、轮转和项目配置。
+
+- [企业框架总能力与审计指南](../ENTERPRISE-CAPABILITIES.md)：HTTP/Dubbo/SDK/XXL-JOB/Kafka、dev/qa、数据库、资源隔离和验证边界。
+
+- [本次能力补齐与使用示例](FRAMEWORK-EXTENSIONS.md)：HTTP、文件报告、生命周期、JAR 数据、轮询、服务发现及验证边界。
+
 - [框架设计分析](ANALYSIS.md)：原 JAR 的架构、完整能力和设计取舍。
 - [能力映射表](CAPABILITY-MAP.md)：原能力对应到通用类、SPI 或不迁移项。
 - [学习实践路线](LEARNING-GUIDE.md)：按测试生命周期逐步熟悉框架。
@@ -20,7 +26,7 @@ mvn test
 mvn test
 ```
 
-预期输出：`Tests run: 12, Failures: 0, Errors: 0`。
+核心测试覆盖原有能力与企业策略、100并发隔离、租约和计划清单。最新各模块计数见根目录 target/verification-summary.json；根目录聚合构建另运行协议适配器、订单实战与企业团队样例。
 
 入门只需读一个文件：`src/test/java/io/testkit/basetest/demo/QuickStartDemoTest.java`。
 它在一个类里演示了一条测试的完整生命周期：
@@ -70,12 +76,18 @@ mvn install   # 安装到本地仓库
 <dependency>
     <groupId>io.testkit</groupId>
     <artifactId>base-test-toolkit</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0-SNAPSHOT</version>
     <scope>test</scope>
 </dependency>
 ```
 
 ## 已实现能力
+
+- 通用 HTTP 客户端、显式当前身份请求、超时和响应断言。
+- JSONL 文件报告、调用指标、多路结果发布。
+- 异常安全的身份/Mock 清理、捕获运行时后的准确汇总。
+- 单用户 YAML 身份绑定、JAR 内相对测试数据加载。
+- 异步结果轮询、静态健康服务实例筛选。
 
 - YAML、JSON、JSON5 配置与测试数据加载。
 - 严格基础类型反序列化。
@@ -122,9 +134,9 @@ mvn clean package
 
 输出：
 
-- Maven 构建目录：`target/base-test-toolkit-1.0.0.jar`
-- 稳定交付目录：`../dist/base-test-toolkit-1.0.0.jar`
-- 校验文件：`../dist/base-test-toolkit-1.0.0.jar.sha256`
+- Maven 构建目录：`target/base-test-toolkit-1.1.0-SNAPSHOT.jar`
+- 开发导出目录：`../dist/`（由脚本按当前JAR名称复制）
+- 校验文件：对应JAR的 `.sha256`；公司正式制品通过批准仓库分发
 
 ## 数据驱动示例
 
@@ -144,6 +156,8 @@ public void search(CaseContext context, SearchRequest request, SearchResponse ex
 默认从测试类包路径读取 `<suiteName>.yaml`，请求和预期文件相对 YAML 所在目录解析。
 
 ## 运行时组合
+
+以下 install 示例用于串行兼容代码。新增测试类优先实现 RuntimeProvider，由 automationRuntime() 返回该实例的运行时；监听器负责绑定线程作用域。完整示例见根目录 ENTERPRISE-CAPABILITIES.md。
 
 ```java
 AutomationRuntime runtime = new AutomationRuntime(

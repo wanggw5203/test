@@ -18,8 +18,21 @@ tools/
 └── api-test-workflow-lab/       # 页面化接口自动化实践台
 
 dist/
-└── api-test-scaffold-generator.jar # 可独立执行的 fat JAR
+├── api-test-scaffold-generator.jar # 可独立执行的 fat JAR
+└── ai-test-flow-idea-plugin-1.1.0.zip # Git-first 企业版 IDEA 插件安装包
+
+tools/ai-test-flow-idea-plugin/      # IDEA 插件源码
 ```
+
+## IDEA 插件
+
+`AI Test Flow` 插件把仓库中的 Skills 编排成 IDEA 右侧工具窗口，支持：
+
+```text
+PRD -> TAD/TRD/STD -> 测试用例 YAML -> Web ATC + 接口 generation-spec -> 反馈与 Manifest
+```
+
+插件内置并统一维护六套测试分析 Skills，知识库项目不需要保存规则文件。1.1 企业版采用 Git-first：外部文件、手工输入和补充证据先登记为项目资产，再生成 TAD、用例、自动化输入和反馈；插件只提供读取、转换、校验和写回能力。支持最多 100 个需求的批量生成、质量门禁、并发覆盖保护以及 Manifest/运行记录。安装、构建和团队部署方式见 [插件说明](tools/ai-test-flow-idea-plugin/README.md)。
 
 每个 `skills` 子目录都可独立安装。`api-test-automation-workflow` 已内置相同 JAR，因此只安装该 Skill 也能执行生成流程。
 

@@ -8,28 +8,40 @@ import org.testng.annotations.BeforeMethod;
 
 /** Minimal base class without application-framework or company-platform dependencies. */
 public abstract class BaseTest {
-    @BeforeMethod(alwaysRun = true)
-    public void bindBaseTestContext(Object[] parameters) {
-        for (Object parameter : parameters) {
-            if (parameter instanceof CaseContext context) {
-                CaseContextHolder.set(context);
-                return;
-            }
-        }
-    }
+  private final ThreadLocal<io.testkit.basetest.runtime.CleanupStack> cleanup =
+      ThreadLocal.withInitial(io.testkit.basetest.runtime.CleanupStack::new);
 
-    protected TestEnvironment environment() {
-        return TestEnvironment.current();
-    }
+  protected void deferCleanup(AutoCloseable action) {
+    cleanup.get().add(action);
+  }
 
-    protected CaseContext currentCase() {
-        return CaseContextHolder.current()
-                .orElseThrow(() -> new IllegalStateException("No data-driven case is active"));
+  @BeforeMethod(alwaysRun = true)
+  public void bindBaseTestContext(Object[] parameters) {
+    for (Object parameter : parameters) {
+      if (parameter instanceof CaseContext context) {
+        CaseContextHolder.set(context);
+        return;
+      }
     }
+  }
 
-    @AfterMethod(alwaysRun = true)
-    public void clearBaseTestContext() {
-        CaseContextHolder.clear();
-        ReturnValueContext.clear();
+  protected TestEnvironment environment() {
+    return TestEnvironment.current();
+  }
+
+  protected CaseContext currentCase() {
+    return CaseContextHolder.current()
+        .orElseThrow(() -> new IllegalStateException("No data-driven case is active"));
+  }
+
+  @AfterMethod(alwaysRun = true)
+  public void clearBaseTestContext() {
+    try {
+      cleanup.get().close();
+    } finally {
+      cleanup.remove();
+      CaseContextHolder.clear();
+      ReturnValueContext.clear();
     }
+  }
 }

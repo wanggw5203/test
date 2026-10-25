@@ -9,10 +9,15 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface DataBuilder {
-    String description() default "";
-    String[] groups() default {};
-    boolean enabled() default true;
-    int priority() default 0;
-    String dataProvider() default "";
-    Class<?> dataProviderClass() default Object.class;
+  String description() default "";
+
+  String[] groups() default {};
+
+  boolean enabled() default true;
+
+  int priority() default 0;
+
+  String dataProvider() default "";
+
+  Class<?> dataProviderClass() default Object.class;
 }
